@@ -3,59 +3,160 @@
 
 <head>
 
+    <title>CyberPoint - Online Digital Service Portal Bihar</title>
+
     <meta charset="UTF-8">
 
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <title>
-        <%= settings && settings.shopName ? settings.shopName : "CyberPoint" %>
-    </title>
+    <meta name="description"
+        content="CyberPoint provides Aadhar Update, New PAN Card, PAN Correction, Income Certificate, Caste Certificate, Residence Certificate and online digital services in Bihar.">
+
+    <meta name="keywords"
+        content="CyberPoint, PAN Card, Aadhar Update, Bihar Online Service, PAN Correction, Digital Service Portal">
+
+    <meta name="author"
+        content="CyberPoint">
+
+    <meta name="robots"
+        content="index, follow">
+
+    <meta property="og:title"
+        content="CyberPoint - Online Digital Service Portal Bihar">
+
+    <meta property="og:description"
+        content="Online PAN, Aadhar and Digital Services Portal">
+
+    <meta property="og:type"
+        content="website">
+
+    <meta property="og:url"
+        content="https://cyber-point.onrender.com">
+
+    <meta property="og:image"
+        content="https://cyber-point.onrender.com/logo.png">
+
+    <link rel="canonical"
+        href="https://cyber-point.onrender.com">
 
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
     <style>
+
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
 
         html {
             scroll-behavior: smooth;
         }
 
         body {
-            background: #f4f7fb;
+            background: #eef4ff;
             overflow-x: hidden;
         }
 
         .top-gradient {
-            background: linear-gradient(90deg, #021b79, #0575e6);
+            background: linear-gradient(90deg, #061a73, #0077ff, #00c6ff);
         }
 
         .hero-gradient {
             background:
-                linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)),
+                radial-gradient(circle at 12% 18%, rgba(0,198,255,0.35), transparent 28%),
+                radial-gradient(circle at 88% 18%, rgba(59,130,246,0.35), transparent 28%),
+                linear-gradient(rgba(2,6,23,0.78), rgba(2,6,23,0.80)),
                 url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1600&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
         }
 
+        .glass {
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(255,255,255,0.22);
+        }
+
+        .white-glass {
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(14,165,233,0.18);
+        }
+
         .service-card {
-            transition: 0.35s;
+            transition: 0.35s ease;
         }
 
         .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            transform: translateY(-10px) scale(1.015);
+            box-shadow: 0 25px 60px rgba(2, 43, 120, 0.18);
         }
 
         .glow-btn {
-            box-shadow: 0 0 25px rgba(14,165,233,0.45);
+            box-shadow: 0 0 30px rgba(34,211,238,0.45);
         }
 
         .main-btn {
-            transition: 0.3s;
+            transition: 0.3s ease;
         }
 
         .main-btn:hover {
             transform: scale(1.05);
+        }
+
+        .shine {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shine::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 70%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: skewX(-20deg);
+            animation: shineMove 4s infinite;
+        }
+
+        @keyframes shineMove {
+            0% {
+                left: -120%;
+            }
+
+            45% {
+                left: 140%;
+            }
+
+            100% {
+                left: 140%;
+            }
+        }
+
+        .float-card {
+            animation: floatCard 4s ease-in-out infinite;
+        }
+
+        @keyframes floatCard {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-14px);
+            }
         }
 
         @media (max-width: 768px) {
@@ -78,19 +179,19 @@
 
     <!-- TOP BAR -->
 
-    <div class="bg-white border-b">
+    <div class="bg-white border-b border-blue-100 shadow-sm">
 
         <div class="max-w-7xl mx-auto px-4 sm:px-5 py-4 flex items-center justify-between gap-4">
 
             <div class="flex items-center gap-3 min-w-0">
 
-                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-blue-900 text-white flex items-center justify-center text-xl sm:text-2xl font-black flex-shrink-0">
+                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-blue-900 to-cyan-500 text-white flex items-center justify-center text-xl sm:text-2xl font-black flex-shrink-0 shadow-lg">
                     CP
                 </div>
 
                 <div class="min-w-0">
 
-                    <h2 class="text-xl sm:text-2xl md:text-4xl font-black text-blue-900 truncate">
+                    <h2 class="text-xl sm:text-2xl md:text-4xl font-black text-blue-950 truncate">
                         <%= settings && settings.shopName ? settings.shopName : "CyberPoint" %>
                     </h2>
 
@@ -105,14 +206,14 @@
             <div class="hidden md:flex items-center gap-5">
 
                 <a href="/status-check"
-                    class="px-6 py-3 rounded-xl border-2 border-blue-600 text-blue-700 font-bold hover:bg-blue-600 hover:text-white transition">
+                    class="px-6 py-3 rounded-2xl border-2 border-blue-600 text-blue-700 font-bold hover:bg-blue-600 hover:text-white transition main-btn">
 
                     Status Check
 
                 </a>
 
                 <a href="/admin/login"
-                    class="px-6 py-3 rounded-xl bg-blue-700 text-white font-black hover:bg-black transition">
+                    class="px-6 py-3 rounded-2xl bg-blue-700 text-white font-black hover:bg-black transition main-btn">
 
                     Admin Login
 
@@ -133,35 +234,35 @@
 
     <!-- NAVBAR -->
 
-    <div class="top-gradient sticky top-0 z-50 shadow-lg">
+    <div class="top-gradient sticky top-0 z-50 shadow-xl">
 
         <div class="max-w-7xl mx-auto px-4 sm:px-5 py-3 overflow-x-auto">
 
             <div class="flex gap-3 sm:gap-6 text-white font-semibold text-sm sm:text-lg whitespace-nowrap">
 
                 <a href="#services"
-                    class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 transition">
+                    class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/25 transition">
 
                     Services
 
                 </a>
 
                 <a href="#links"
-                    class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 transition">
+                    class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/25 transition">
 
                     Important Links
 
                 </a>
 
                 <a href="#contact"
-                    class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 transition">
+                    class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/25 transition">
 
                     Contact
 
                 </a>
 
                 <a href="/admin/login"
-                    class="md:hidden px-4 py-2 rounded-xl bg-cyan-400 text-black font-black">
+                    class="md:hidden px-4 py-2 rounded-xl bg-cyan-300 text-black font-black">
 
                     Admin
 
@@ -175,21 +276,24 @@
 
     <!-- HERO SECTION -->
 
-    <section class="hero-gradient min-h-[85vh] flex items-center">
+    <section class="hero-gradient min-h-[88vh] flex items-center relative overflow-hidden">
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-5 py-12 sm:py-16 grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+        <div class="absolute top-20 left-10 w-72 h-72 bg-cyan-400/20 blur-[100px] rounded-full"></div>
+        <div class="absolute bottom-20 right-10 w-80 h-80 bg-blue-500/20 blur-[120px] rounded-full"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-5 py-12 sm:py-16 grid lg:grid-cols-2 gap-10 lg:gap-14 items-center relative z-10">
 
             <!-- LEFT -->
 
             <div>
 
-                <div class="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 sm:px-5 py-3 rounded-full border border-white/20 mb-6 sm:mb-8">
+                <div class="inline-flex items-center gap-3 glass px-4 sm:px-5 py-3 rounded-full mb-6 sm:mb-8">
 
                     <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse flex-shrink-0"></div>
 
                     <span class="text-white font-semibold tracking-wider text-xs sm:text-sm">
 
-                        PREMIUM GOVERNMENT SERVICE PORTAL
+                        LIVE PREMIUM GOVERNMENT SERVICE PORTAL
 
                     </span>
 
@@ -206,7 +310,7 @@
 
                 </h1>
 
-                <p class="text-white/80 text-base sm:text-xl mt-6 sm:mt-8 leading-8 sm:leading-9 max-w-2xl">
+                <p class="text-white/85 text-base sm:text-xl mt-6 sm:mt-8 leading-8 sm:leading-9 max-w-2xl">
 
                     <%= settings && settings.noticeText ? settings.noticeText : "Aadhar, PAN, Certificate aur Government Online Services ka premium digital solution." %>
 
@@ -215,7 +319,7 @@
                 <div class="grid sm:flex gap-4 sm:gap-5 mt-8 sm:mt-10">
 
                     <a href="#services"
-                        class="main-btn text-center px-8 sm:px-10 py-4 sm:py-5 rounded-2xl bg-cyan-400 text-black font-black text-base sm:text-lg glow-btn">
+                        class="shine main-btn text-center px-8 sm:px-10 py-4 sm:py-5 rounded-2xl bg-cyan-300 text-black font-black text-base sm:text-lg glow-btn">
 
                         Explore Services
 
@@ -223,7 +327,7 @@
 
                     <a href="https://wa.me/<%= settings && settings.whatsappNumber ? settings.whatsappNumber : '' %>"
                         target="_blank"
-                        class="main-btn text-center px-8 sm:px-10 py-4 sm:py-5 rounded-2xl bg-green-500 text-black font-black text-base sm:text-lg">
+                        class="main-btn text-center px-8 sm:px-10 py-4 sm:py-5 rounded-2xl bg-green-500 text-black font-black text-base sm:text-lg shadow-xl">
 
                         WhatsApp
 
@@ -231,40 +335,63 @@
 
                 </div>
 
+                <div class="grid grid-cols-3 gap-3 sm:gap-5 mt-10 max-w-xl">
+
+                    <div class="glass rounded-2xl p-4 text-center">
+                        <h3 class="text-2xl sm:text-3xl font-black text-cyan-300">24/7</h3>
+                        <p class="text-white/70 text-xs sm:text-sm mt-1">Support</p>
+                    </div>
+
+                    <div class="glass rounded-2xl p-4 text-center">
+                        <h3 class="text-2xl sm:text-3xl font-black text-green-300">Fast</h3>
+                        <p class="text-white/70 text-xs sm:text-sm mt-1">Process</p>
+                    </div>
+
+                    <div class="glass rounded-2xl p-4 text-center">
+                        <h3 class="text-2xl sm:text-3xl font-black text-yellow-300">Safe</h3>
+                        <p class="text-white/70 text-xs sm:text-sm mt-1">Upload</p>
+                    </div>
+
+                </div>
+
             </div>
 
             <!-- RIGHT -->
 
-            <div class="bg-white rounded-[28px] sm:rounded-[35px] shadow-2xl p-6 sm:p-10 mobile-card">
+            <div class="white-glass rounded-[28px] sm:rounded-[35px] shadow-2xl p-6 sm:p-10 mobile-card float-card">
 
-                <h2 class="text-3xl sm:text-4xl font-black text-blue-900 text-center">
-                    Welcome
+                <h2 class="text-3xl sm:text-4xl font-black text-blue-950 text-center">
+                    Apply Online
                 </h2>
 
-                <div class="w-32 h-32 sm:w-44 sm:h-44 rounded-full bg-blue-100 mx-auto mt-6 sm:mt-8 flex items-center justify-center text-5xl sm:text-7xl">
+                <p class="text-center text-gray-500 mt-3">
+                    Select service and continue
+                </p>
+
+                <div class="w-32 h-32 sm:w-44 sm:h-44 rounded-full bg-gradient-to-br from-blue-100 to-cyan-100 mx-auto mt-6 sm:mt-8 flex items-center justify-center text-5xl sm:text-7xl shadow-inner">
                     🔐
                 </div>
 
                 <div class="mt-8 sm:mt-10 space-y-4 sm:space-y-5">
 
                     <a href="/aadhar-update"
-                        class="block w-full text-center py-4 sm:py-5 rounded-2xl bg-blue-700 text-white text-lg sm:text-xl font-black hover:bg-black transition">
+                        class="block w-full text-center py-4 sm:py-5 rounded-2xl bg-blue-700 text-white text-lg sm:text-xl font-black hover:bg-black transition main-btn">
 
-                        Aadhar Update
+                        🪪 Aadhar Update
 
                     </a>
 
                     <a href="/new-pan"
-                        class="block w-full text-center py-4 sm:py-5 rounded-2xl bg-cyan-500 text-black text-lg sm:text-xl font-black hover:bg-black hover:text-white transition">
+                        class="block w-full text-center py-4 sm:py-5 rounded-2xl bg-cyan-500 text-black text-lg sm:text-xl font-black hover:bg-black hover:text-white transition main-btn">
 
-                        New PAN Card
+                        💳 New PAN Card
 
                     </a>
 
                     <a href="/pan-correction"
-                        class="block w-full text-center py-4 sm:py-5 rounded-2xl bg-green-500 text-black text-lg sm:text-xl font-black hover:bg-black hover:text-white transition">
+                        class="block w-full text-center py-4 sm:py-5 rounded-2xl bg-green-500 text-black text-lg sm:text-xl font-black hover:bg-black hover:text-white transition main-btn">
 
-                        PAN Correction
+                        📄 PAN Correction
 
                     </a>
 
@@ -278,13 +405,17 @@
 
     <!-- SERVICES -->
 
-    <section id="services" class="py-16 sm:py-24">
+    <section id="services" class="py-16 sm:py-24 bg-gradient-to-b from-[#eef4ff] to-white">
 
         <div class="max-w-7xl mx-auto px-4 sm:px-5">
 
             <div class="text-center mb-12 sm:mb-20">
 
-                <h2 class="text-4xl sm:text-5xl md:text-6xl font-black text-blue-900">
+                <div class="inline-block px-5 py-2 rounded-full bg-blue-100 text-blue-700 font-black mb-5">
+                    Our Services
+                </div>
+
+                <h2 class="text-4xl sm:text-5xl md:text-6xl font-black text-blue-950">
 
                     Premium Services
 
@@ -298,13 +429,13 @@
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10">
 
-                <div class="service-card bg-white rounded-[28px] sm:rounded-[35px] p-6 sm:p-10 border shadow-sm">
+                <div class="service-card bg-white rounded-[28px] sm:rounded-[35px] p-6 sm:p-10 border border-blue-100 shadow-lg">
 
                     <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-cyan-100 flex items-center justify-center text-4xl sm:text-5xl">
                         🪪
                     </div>
 
-                    <h3 class="text-2xl sm:text-3xl font-black text-blue-900 mt-6 sm:mt-8">
+                    <h3 class="text-2xl sm:text-3xl font-black text-blue-950 mt-6 sm:mt-8">
                         Aadhar Update
                     </h3>
 
@@ -313,7 +444,7 @@
                     </p>
 
                     <a href="/aadhar-update"
-                        class="block text-center mt-6 sm:mt-8 py-4 sm:py-5 rounded-2xl bg-cyan-500 text-black font-black text-base sm:text-lg hover:bg-black hover:text-white transition">
+                        class="block text-center mt-6 sm:mt-8 py-4 sm:py-5 rounded-2xl bg-cyan-500 text-black font-black text-base sm:text-lg hover:bg-black hover:text-white transition main-btn">
 
                         Apply Now
 
@@ -321,13 +452,13 @@
 
                 </div>
 
-                <div class="service-card bg-white rounded-[28px] sm:rounded-[35px] p-6 sm:p-10 border shadow-sm">
+                <div class="service-card bg-white rounded-[28px] sm:rounded-[35px] p-6 sm:p-10 border border-blue-100 shadow-lg">
 
                     <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-purple-100 flex items-center justify-center text-4xl sm:text-5xl">
                         💳
                     </div>
 
-                    <h3 class="text-2xl sm:text-3xl font-black text-blue-900 mt-6 sm:mt-8">
+                    <h3 class="text-2xl sm:text-3xl font-black text-blue-950 mt-6 sm:mt-8">
                         New PAN Card
                     </h3>
 
@@ -336,7 +467,7 @@
                     </p>
 
                     <a href="/new-pan"
-                        class="block text-center mt-6 sm:mt-8 py-4 sm:py-5 rounded-2xl bg-purple-500 text-white font-black text-base sm:text-lg hover:bg-black transition">
+                        class="block text-center mt-6 sm:mt-8 py-4 sm:py-5 rounded-2xl bg-purple-500 text-white font-black text-base sm:text-lg hover:bg-black transition main-btn">
 
                         Apply Now
 
@@ -344,13 +475,13 @@
 
                 </div>
 
-                <div class="service-card bg-white rounded-[28px] sm:rounded-[35px] p-6 sm:p-10 border shadow-sm md:col-span-2 lg:col-span-1">
+                <div class="service-card bg-white rounded-[28px] sm:rounded-[35px] p-6 sm:p-10 border border-blue-100 shadow-lg md:col-span-2 lg:col-span-1">
 
                     <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-green-100 flex items-center justify-center text-4xl sm:text-5xl">
                         📄
                     </div>
 
-                    <h3 class="text-2xl sm:text-3xl font-black text-blue-900 mt-6 sm:mt-8">
+                    <h3 class="text-2xl sm:text-3xl font-black text-blue-950 mt-6 sm:mt-8">
                         PAN Correction
                     </h3>
 
@@ -359,7 +490,7 @@
                     </p>
 
                     <a href="/pan-correction"
-                        class="block text-center mt-6 sm:mt-8 py-4 sm:py-5 rounded-2xl bg-green-500 text-black font-black text-base sm:text-lg hover:bg-black hover:text-white transition">
+                        class="block text-center mt-6 sm:mt-8 py-4 sm:py-5 rounded-2xl bg-green-500 text-black font-black text-base sm:text-lg hover:bg-black hover:text-white transition main-btn">
 
                         Apply Now
 
@@ -381,7 +512,11 @@
 
             <div class="text-center mb-12 sm:mb-20">
 
-                <h2 class="text-4xl sm:text-5xl md:text-6xl font-black text-blue-900">
+                <div class="inline-block px-5 py-2 rounded-full bg-cyan-100 text-blue-700 font-black mb-5">
+                    Useful Links
+                </div>
+
+                <h2 class="text-4xl sm:text-5xl md:text-6xl font-black text-blue-950">
 
                     Important Websites
 
@@ -397,13 +532,13 @@
 
                         <a href="<%= link.url %>"
                             target="_blank"
-                            class="service-card bg-[#f7fbff] border rounded-[28px] sm:rounded-[30px] p-6 sm:p-8 text-center">
+                            class="service-card bg-[#f7fbff] border border-blue-100 rounded-[28px] sm:rounded-[30px] p-6 sm:p-8 text-center shadow-md">
 
                             <div class="text-5xl sm:text-6xl">
                                 🌐
                             </div>
 
-                            <h3 class="text-xl sm:text-2xl font-black text-blue-900 mt-5 sm:mt-6">
+                            <h3 class="text-xl sm:text-2xl font-black text-blue-950 mt-5 sm:mt-6">
                                 <%= link.title %>
                             </h3>
 
@@ -417,13 +552,13 @@
 
                 <% } else { %>
 
-                    <div class="bg-[#f7fbff] border rounded-[28px] p-8 text-center sm:col-span-2 lg:col-span-4">
+                    <div class="bg-[#f7fbff] border border-blue-100 rounded-[28px] p-8 text-center sm:col-span-2 lg:col-span-4">
 
                         <div class="text-6xl">
                             🔗
                         </div>
 
-                        <h3 class="text-2xl font-black text-blue-900 mt-5">
+                        <h3 class="text-2xl font-black text-blue-950 mt-5">
                             Important links will be updated soon.
                         </h3>
 
@@ -439,13 +574,17 @@
 
     <!-- CONTACT -->
 
-    <section id="contact" class="py-16 sm:py-24 bg-[#021b79]">
+    <section id="contact" class="py-16 sm:py-24 bg-gradient-to-r from-blue-950 via-blue-800 to-cyan-700">
 
         <div class="max-w-5xl mx-auto px-4 sm:px-5">
 
             <div class="bg-white rounded-[28px] sm:rounded-[40px] p-6 sm:p-12 text-center shadow-2xl">
 
-                <h2 class="text-4xl sm:text-5xl font-black text-blue-900">
+                <div class="inline-block px-5 py-2 rounded-full bg-blue-100 text-blue-700 font-black mb-5">
+                    Need Help?
+                </div>
+
+                <h2 class="text-4xl sm:text-5xl font-black text-blue-950">
 
                     Contact Us
 
@@ -461,14 +600,14 @@
 
                     <a href="https://wa.me/<%= settings && settings.whatsappNumber ? settings.whatsappNumber : '' %>"
                         target="_blank"
-                        class="text-center px-8 sm:px-10 py-4 sm:py-5 rounded-2xl bg-green-500 text-black font-black text-base sm:text-lg hover:bg-black hover:text-white transition">
+                        class="text-center px-8 sm:px-10 py-4 sm:py-5 rounded-2xl bg-green-500 text-black font-black text-base sm:text-lg hover:bg-black hover:text-white transition main-btn">
 
                         WhatsApp Now
 
                     </a>
 
                     <a href="/status-check"
-                        class="text-center px-8 sm:px-10 py-4 sm:py-5 rounded-2xl bg-blue-700 text-white font-black text-base sm:text-lg hover:bg-black transition">
+                        class="text-center px-8 sm:px-10 py-4 sm:py-5 rounded-2xl bg-blue-700 text-white font-black text-base sm:text-lg hover:bg-black transition main-btn">
 
                         Check Status
 
@@ -484,7 +623,7 @@
 
     <!-- MOBILE BOTTOM BAR -->
 
-    <div class="fixed bottom-0 left-0 right-0 z-50 bg-white border-t shadow-2xl md:hidden">
+    <div class="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-blue-100 shadow-2xl md:hidden">
 
         <div class="grid grid-cols-4 text-center text-xs font-black">
 
