@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Staff Management</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#050816] text-white">
+
+    <div class="max-w-6xl mx-auto p-6">
+
+        <div class="flex items-center justify-between">
+
+            <div>
+
+                <h1 class="text-4xl font-bold text-cyan-400">
+                    Staff Management
+                </h1>
+
+                <p class="text-gray-400 mt-3">
+                    Create and manage staff accounts
+                </p>
+
+            </div>
+
+            <a href="/admin/dashboard"
+                class="px-6 py-3 bg-cyan-500 rounded-2xl text-black font-bold">
+                Dashboard
+            </a>
+
+        </div>
+
+        <!-- ADD STAFF -->
+
+        <div class="bg-[#0b1120] border border-cyan-500 rounded-3xl p-8 mt-10">
+
+            <h2 class="text-3xl font-bold text-cyan-400">
+                Add Staff
+            </h2>
+
+            <form
+                action="/admin/add-staff"
+                method="POST"
+                class="grid md:grid-cols-4 gap-5 mt-8">
+
+                <input
+                    type="text"
+                    name="username"
+                    required
+                    placeholder="Username"
+                    class="px-5 py-4 rounded-2xl bg-black border border-cyan-400 outline-none">
+
+                <input
+                    type="text"
+                    name="password"
+                    required
+                    placeholder="Password"
+                    class="px-5 py-4 rounded-2xl bg-black border border-cyan-400 outline-none">
+
+                <select
+                    name="role"
+                    class="px-5 py-4 rounded-2xl bg-black border border-cyan-400 outline-none">
+
+                    <option value="staff">
+                        Staff
+                    </option>
+
+                    <option value="manager">
+                        Manager
+                    </option>
+
+                </select>
+
+                <button
+                    type="submit"
+                    class="bg-cyan-500 rounded-2xl text-black font-bold">
+
+                    Add Staff
+
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- STAFF LIST -->
+
+        <div class="bg-[#0b1120] border border-cyan-500 rounded-3xl p-8 mt-10">
+
+            <h2 class="text-3xl font-bold text-cyan-400">
+                Staff Accounts
+            </h2>
+
+            <div class="overflow-x-auto mt-8">
+
+                <table class="w-full">
+
+                    <thead class="bg-black text-cyan-400">
+
+                        <tr>
+                            <th class="p-5 text-left">
+                                Username
+                            </th>
+
+                            <th class="p-5 text-left">
+                                Password
+                            </th>
+
+                            <th class="p-5 text-left">
+                                Role
+                            </th>
+
+                            <th class="p-5 text-left">
+                                Action
+                            </th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <% staffUsers.forEach((staff) => { %>
+
+                            <tr class="border-t border-gray-800">
+
+                                <td class="p-5">
+                                    <%= staff.username %>
+                                </td>
+
+                                <td class="p-5">
+                                    <%= staff.password %>
+                                </td>
+
+                                <td class="p-5">
+                                    <%= staff.role %>
+                                </td>
+
+                                <td class="p-5">
+
+                                    <form
+                                        action="/admin/delete-staff/<%= staff.username %>"
+                                        method="POST">
+
+                                        <button
+                                            type="submit"
+                                            class="px-5 py-3 bg-red-500 rounded-xl text-white font-bold">
+
+                                            Delete
+
+                                        </button>
+
+                                    </form>
+
+                                </td>
+
+                            </tr>
+
+                        <% }) %>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

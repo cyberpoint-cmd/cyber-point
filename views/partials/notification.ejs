@@ -1,0 +1,104 @@
+<div class="fixed top-5 right-5 z-50">
+
+    <a href="/admin/otp-requests"
+        class="relative bg-black border border-cyan-500 rounded-2xl px-5 py-4 shadow-2xl inline-block">
+
+        🔔
+
+        <span id="notificationCount"
+            class="hidden absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-2 py-1">
+            0
+        </span>
+
+    </a>
+
+</div>
+
+<div id="notificationToast"
+    class="hidden fixed top-24 right-5 z-50 bg-[#0b1120] border border-cyan-500 rounded-2xl p-5 shadow-2xl max-w-sm">
+
+    <h3 class="text-cyan-400 font-bold text-lg">
+        New Request Received 🔔
+    </h3>
+
+    <p id="notificationText"
+        class="text-gray-300 mt-2">
+
+        New application received.
+
+    </p>
+
+</div>
+
+<script>
+
+    let oldNotificationCount = 0;
+
+    async function checkNotifications() {
+
+        try {
+
+            const response =
+                await fetch("/admin/notifications/count");
+
+            const data =
+                await response.json();
+
+            const countBox =
+                document.getElementById("notificationCount");
+
+            if (data.count > 0) {
+
+                countBox.innerText =
+                    data.count;
+
+                countBox.classList.remove("hidden");
+
+            } else {
+
+                countBox.classList.add("hidden");
+
+            }
+
+            if (data.count > oldNotificationCount) {
+
+                showNotificationToast(data.latestMessage);
+
+            }
+
+            oldNotificationCount = data.count;
+
+        } catch (error) {
+
+            console.log(error);
+
+        }
+
+    }
+
+    function showNotificationToast(message) {
+
+        const toast =
+            document.getElementById("notificationToast");
+
+        const text =
+            document.getElementById("notificationText");
+
+        text.innerText =
+            message || "New request received";
+
+        toast.classList.remove("hidden");
+
+        setTimeout(() => {
+
+            toast.classList.add("hidden");
+
+        }, 5000);
+
+    }
+
+    checkNotifications();
+
+    setInterval(checkNotifications, 8000);
+
+</script>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Profile</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#050816] text-white">
+
+    <div class="max-w-5xl mx-auto p-6">
+
+        <div class="flex items-center justify-between">
+
+            <div>
+                <h1 class="text-4xl font-bold text-cyan-400">
+                    Admin Profile
+                </h1>
+
+                <p class="text-gray-400 mt-3">
+                    Admin name, email, bio aur profile photo update karein.
+                </p>
+            </div>
+
+            <a href="/admin/dashboard"
+                class="px-6 py-3 bg-cyan-500 rounded-2xl text-black font-bold">
+                Dashboard
+            </a>
+
+        </div>
+
+        <% if (success) { %>
+
+            <div class="bg-green-500/20 border border-green-500 text-green-400 rounded-2xl p-5 mt-8">
+                <%= success %>
+            </div>
+
+        <% } %>
+
+        <div class="grid md:grid-cols-3 gap-8 mt-10">
+
+            <div class="bg-[#0b1120] border border-cyan-500 rounded-3xl p-8 text-center">
+
+                <% if (profile.profileImage) { %>
+
+                    <img src="<%= profile.profileImage %>"
+                        class="w-40 h-40 rounded-full object-cover mx-auto border-4 border-cyan-500">
+
+                <% } else { %>
+
+                    <div class="w-40 h-40 rounded-full bg-cyan-500 mx-auto flex items-center justify-center text-black text-5xl font-bold">
+                        A
+                    </div>
+
+                <% } %>
+
+                <h2 class="text-3xl font-bold text-cyan-400 mt-6">
+                    <%= profile.name %>
+                </h2>
+
+                <p class="text-gray-400 mt-2">
+                    <%= profile.email %>
+                </p>
+
+                <p class="text-gray-300 mt-4">
+                    <%= profile.bio %>
+                </p>
+
+            </div>
+
+            <div class="md:col-span-2 bg-[#0b1120] border border-cyan-500 rounded-3xl p-8">
+
+                <h2 class="text-3xl font-bold text-cyan-400">
+                    Update Profile
+                </h2>
+
+                <form
+                    action="/admin/profile"
+                    method="POST"
+                    enctype="multipart/form-data"
+                    class="space-y-6 mt-8">
+
+                    <div>
+                        <label class="block mb-2 text-gray-300">
+                            Admin Name
+                        </label>
+
+                        <input
+                            type="text"
+                            name="name"
+                            value="<%= profile.name %>"
+                            required
+                            class="w-full px-5 py-4 rounded-2xl bg-black border border-cyan-400 outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block mb-2 text-gray-300">
+                            Admin Email
+                        </label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            value="<%= profile.email %>"
+                            required
+                            class="w-full px-5 py-4 rounded-2xl bg-black border border-cyan-400 outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block mb-2 text-gray-300">
+                            Admin Bio
+                        </label>
+
+                        <textarea
+                            name="bio"
+                            rows="4"
+                            class="w-full px-5 py-4 rounded-2xl bg-black border border-cyan-400 outline-none"><%= profile.bio %></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block mb-2 text-gray-300">
+                            Profile Image
+                        </label>
+
+                        <input
+                            type="file"
+                            name="profileImage"
+                            accept=".jpg,.jpeg,.png"
+                            class="w-full bg-black border border-cyan-400 rounded-2xl p-4">
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="w-full py-4 bg-cyan-500 rounded-2xl text-black font-bold hover:bg-cyan-600 transition">
+
+                        Save Profile
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

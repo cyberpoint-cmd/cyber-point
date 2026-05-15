@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Application View
+    </title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-[#050816] text-white">
+
+    <div class="max-w-7xl mx-auto p-6">
+
+        <!-- TOP -->
+
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+
+            <div>
+
+                <h1 class="text-4xl font-bold text-cyan-400">
+                    Application Details
+                </h1>
+
+                <p class="text-gray-400 mt-2">
+                    Full customer application information
+                </p>
+
+            </div>
+
+            <a href="/admin/dashboard"
+                class="px-6 py-3 bg-cyan-500 rounded-2xl text-black font-bold text-center">
+
+                Dashboard
+
+            </a>
+
+        </div>
+
+        <!-- MAIN INFO -->
+
+        <div class="grid lg:grid-cols-2 gap-8 mt-10">
+
+            <!-- LEFT -->
+
+            <div class="bg-[#0b1120] border border-cyan-500 rounded-3xl p-8">
+
+                <h2 class="text-3xl font-bold text-cyan-400">
+                    Customer Details
+                </h2>
+
+                <div class="space-y-5 mt-8">
+
+                    <div>
+                        <p class="text-gray-400">Applicant Name</p>
+                        <h3 class="text-2xl font-bold mt-1">
+                            <%= application.applicantName || "N/A" %>
+                        </h3>
+                    </div>
+
+                    <div>
+                        <p class="text-gray-400">Mobile Number</p>
+                        <h3 class="text-xl font-bold mt-1">
+                            <%= application.phoneNumber || "N/A" %>
+                        </h3>
+                    </div>
+
+                    <div>
+                        <p class="text-gray-400">Service Type</p>
+                        <h3 class="text-xl font-bold mt-1 text-cyan-400">
+                            <%= application.serviceType || "N/A" %>
+                        </h3>
+                    </div>
+
+                    <div>
+                        <p class="text-gray-400">Token Number</p>
+                        <h3 class="text-xl font-bold mt-1">
+                            <%= application.tokenNumber || "N/A" %>
+                        </h3>
+                    </div>
+
+                    <div>
+                        <p class="text-gray-400">Amount</p>
+                        <h3 class="text-xl font-bold mt-1 text-green-400">
+                            ₹ <%= application.amount || 0 %>
+                        </h3>
+                    </div>
+
+                    <div>
+                        <p class="text-gray-400">UTR Number</p>
+                        <h3 class="text-xl font-bold mt-1">
+                            <%= application.utrNumber || "N/A" %>
+                        </h3>
+                    </div>
+
+                    <div>
+                        <p class="text-gray-400">Current Status</p>
+
+                        <div class="mt-3">
+
+                            <% if (application.status === "Completed") { %>
+
+                                <span class="px-5 py-2 bg-green-500 text-white rounded-xl font-bold">
+                                    Completed
+                                </span>
+
+                            <% } else if (application.status === "Pending") { %>
+
+                                <span class="px-5 py-2 bg-yellow-500 text-black rounded-xl font-bold">
+                                    Pending
+                                </span>
+
+                            <% } else if (application.status === "Rejected") { %>
+
+                                <span class="px-5 py-2 bg-red-500 text-white rounded-xl font-bold">
+                                    Rejected
+                                </span>
+
+                            <% } else { %>
+
+                                <span class="px-5 py-2 bg-blue-500 text-white rounded-xl font-bold">
+                                    <%= application.status || "Processing" %>
+                                </span>
+
+                            <% } %>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- RIGHT -->
+
+            <div class="space-y-8">
+
+                <!-- STATUS UPDATE -->
+
+                <div class="bg-[#0b1120] border border-cyan-500 rounded-3xl p-8">
+
+                    <h2 class="text-3xl font-bold text-cyan-400">
+                        Update Status
+                    </h2>
+
+                    <form
+                        action="/admin/update-status/<%= application.tokenNumber %>"
+                        method="POST"
+                        class="mt-8 space-y-5">
+
+                        <select
+                            name="status"
+                            class="w-full px-5 py-4 rounded-2xl bg-black border border-cyan-400 outline-none">
+
+                            <option value="Pending">Pending</option>
+                            <option value="Processing">Processing</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Rejected">Rejected</option>
+
+                        </select>
+
+                        <button
+                            type="submit"
+                            class="w-full py-4 bg-cyan-500 rounded-2xl text-black font-bold">
+
+                            Update Status
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+                <!-- WHATSAPP QUICK MESSAGE -->
+
+                <div class="bg-[#0b1120] border border-green-500 rounded-3xl p-8">
+
+                    <h2 class="text-3xl font-bold text-green-400">
+                        WhatsApp Quick Message
+                    </h2>
+
+                    <p class="text-gray-400 mt-3">
+                        Customer ko direct WhatsApp message bhejne ke liye button use karein.
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-4 mt-8">
+
+                        <a
+                            href="https://wa.me/91<%= application.phoneNumber %>?text=<%= encodeURIComponent('Hello ' + (application.applicantName || 'Customer') + ', your ' + (application.serviceType || 'application') + ' status is: ' + (application.status || 'Pending') + '. Token Number: ' + (application.tokenNumber || '') + '. - CyberPoint') %>"
+                            target="_blank"
+                            class="text-center px-5 py-4 bg-green-500 rounded-2xl text-black font-bold hover:bg-green-600 transition">
+
+                            Send Status
+
+                        </a>
+
+                        <a
+                            href="https://wa.me/91<%= application.phoneNumber %>?text=<%= encodeURIComponent('Hello ' + (application.applicantName || 'Customer') + ', your receiving is ready. Please check/download using your token: ' + (application.tokenNumber || '') + '. - CyberPoint') %>"
+                            target="_blank"
+                            class="text-center px-5 py-4 bg-cyan-500 rounded-2xl text-black font-bold hover:bg-cyan-600 transition">
+
+                            Receiving Ready
+
+                        </a>
+
+                        <a
+                            href="https://wa.me/91<%= application.phoneNumber %>?text=<%= encodeURIComponent('Hello ' + (application.applicantName || 'Customer') + ', your payment is pending for ' + (application.serviceType || 'service') + '. Amount: ₹' + (application.amount || 0) + '. Token Number: ' + (application.tokenNumber || '') + '. - CyberPoint') %>"
+                            target="_blank"
+                            class="text-center px-5 py-4 bg-yellow-500 rounded-2xl text-black font-bold hover:bg-yellow-600 transition">
+
+                            Payment Pending
+
+                        </a>
+
+                        <a
+                            href="https://wa.me/91<%= application.phoneNumber %>?text=<%= encodeURIComponent('Hello ' + (application.applicantName || 'Customer') + ', please contact CyberPoint regarding your application. Token Number: ' + (application.tokenNumber || '') + '. - CyberPoint') %>"
+                            target="_blank"
+                            class="text-center px-5 py-4 bg-purple-500 rounded-2xl text-white font-bold hover:bg-purple-600 transition">
+
+                            Custom Message
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <!-- RECEIVING -->
+
+                <div class="bg-[#0b1120] border border-cyan-500 rounded-3xl p-8">
+
+                    <h2 class="text-3xl font-bold text-cyan-400">
+                        Receiving PDF
+                    </h2>
+
+                    <% if (application.receivingPdf) { %>
+
+                        <div class="flex flex-wrap gap-4 mt-8">
+
+                            <a href="<%= application.receivingPdf %>"
+                                target="_blank"
+                                class="px-6 py-4 bg-green-500 rounded-2xl text-white font-bold">
+
+                                Open PDF
+
+                            </a>
+
+                            <a href="<%= application.receivingPdf %>"
+                                download
+                                class="px-6 py-4 bg-cyan-500 rounded-2xl text-black font-bold">
+
+                                Download PDF
+
+                            </a>
+
+                        </div>
+
+                    <% } else { %>
+
+                        <p class="text-gray-400 mt-6">
+                            No receiving uploaded yet.
+                        </p>
+
+                    <% } %>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- DOCUMENTS -->
+
+        <div class="bg-[#0b1120] border border-cyan-500 rounded-3xl p-8 mt-10">
+
+            <h2 class="text-3xl font-bold text-cyan-400">
+                Uploaded Documents
+            </h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+
+                <% if (application.documents && Object.keys(application.documents).length > 0) { %>
+
+                    <% Object.keys(application.documents).forEach((key) => { %>
+
+                        <% const doc = application.documents[key]; %>
+
+                        <% if (doc) { %>
+
+                            <div class="bg-black border border-cyan-500 rounded-3xl overflow-hidden">
+
+                                <% if (
+                                    doc.endsWith(".jpg") ||
+                                    doc.endsWith(".jpeg") ||
+                                    doc.endsWith(".png") ||
+                                    doc.endsWith(".webp")
+                                ) { %>
+
+                                    <img src="<%= doc %>"
+                                        class="w-full h-72 object-cover">
+
+                                <% } else if (doc.endsWith(".pdf")) { %>
+
+                                    <div class="h-72 flex flex-col items-center justify-center bg-[#111827]">
+
+                                        <div class="text-7xl">
+                                            📄
+                                        </div>
+
+                                        <h3 class="text-xl font-bold text-red-400 mt-5">
+                                            PDF Document
+                                        </h3>
+
+                                    </div>
+
+                                <% } else { %>
+
+                                    <div class="h-72 flex flex-col items-center justify-center bg-[#111827]">
+
+                                        <div class="text-7xl">
+                                            📁
+                                        </div>
+
+                                        <h3 class="text-xl font-bold text-cyan-400 mt-5">
+                                            File
+                                        </h3>
+
+                                    </div>
+
+                                <% } %>
+
+                                <div class="p-6 space-y-4">
+
+                                    <p class="text-cyan-400 font-bold">
+                                        <%= key %>
+                                    </p>
+
+                                    <a href="<%= doc %>"
+                                        target="_blank"
+                                        class="block w-full py-4 bg-cyan-500 rounded-2xl text-black font-bold text-center">
+
+                                        Open File
+
+                                    </a>
+
+                                    <a href="<%= doc %>"
+                                        download
+                                        class="block w-full py-4 bg-green-500 rounded-2xl text-white font-bold text-center">
+
+                                        Download
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        <% } %>
+
+                    <% }) %>
+
+                <% } else { %>
+
+                    <div class="col-span-full text-center py-20">
+
+                        <div class="text-7xl">
+                            📂
+                        </div>
+
+                        <h3 class="text-3xl font-bold text-gray-400 mt-6">
+                            No Documents Uploaded
+                        </h3>
+
+                    </div>
+
+                <% } %>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

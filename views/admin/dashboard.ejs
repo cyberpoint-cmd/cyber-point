@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>CyberPoint Admin Dashboard</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            background:
+                radial-gradient(circle at top left, rgba(6,182,212,0.18), transparent 30%),
+                radial-gradient(circle at top right, rgba(59,130,246,0.14), transparent 30%),
+                #020617;
+        }
+
+        .premium-card {
+            background: rgba(15,23,42,0.88);
+            border: 1px solid rgba(34,211,238,0.22);
+            backdrop-filter: blur(18px);
+            box-shadow: 0 20px 55px rgba(0,0,0,0.35);
+            transition: 0.28s ease;
+        }
+
+        .premium-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 25px 70px rgba(6,182,212,0.18);
+        }
+
+        .premium-btn {
+            transition: 0.25s ease;
+        }
+
+        .premium-btn:hover {
+            transform: scale(1.04);
+        }
+
+        .sidebar-link {
+            transition: 0.25s ease;
+        }
+
+        .sidebar-link:hover {
+            transform: translateX(6px);
+        }
+    </style>
+</head>
+
+<body class="text-white">
+
+    <div class="flex min-h-screen">
+
+        <!-- SIDEBAR -->
+
+        <aside class="w-72 bg-black/70 backdrop-blur-xl border-r border-cyan-500/30 p-6 hidden md:block overflow-y-auto">
+
+            <div class="mb-10">
+                <h1 class="text-4xl font-black text-cyan-400">
+                    CyberPoint
+                </h1>
+
+                <p class="text-gray-400 mt-2">
+                    Premium Admin Panel
+                </p>
+            </div>
+
+            <div class="space-y-4">
+
+                <a href="/admin/dashboard"
+                    class="sidebar-link block px-5 py-4 rounded-2xl bg-cyan-500 text-black font-black">
+                    Dashboard
+                </a>
+
+                <a href="/admin/profile"
+                    class="sidebar-link block px-5 py-4 rounded-2xl border border-cyan-500/40 hover:bg-cyan-500 hover:text-black">
+                    Admin Profile
+                </a>
+
+                <a href="/admin/staff-management"
+                    class="sidebar-link block px-5 py-4 rounded-2xl border border-cyan-500/40 hover:bg-cyan-500 hover:text-black">
+                    Staff Management
+                </a>
+
+                <a href="/admin/activity-logs"
+                    class="sidebar-link block px-5 py-4 rounded-2xl border border-cyan-500/40 hover:bg-cyan-500 hover:text-black">
+                    Activity Logs
+                </a>
+
+                <a href="/admin/change-password"
+                    class="sidebar-link block px-5 py-4 rounded-2xl border border-cyan-500/40 hover:bg-cyan-500 hover:text-black">
+                    Change Password
+                </a>
+
+                <a href="/admin/advanced-search"
+                    class="sidebar-link block px-5 py-4 rounded-2xl border border-cyan-500/40 hover:bg-cyan-500 hover:text-black">
+                    Advanced Search
+                </a>
+
+                <a href="/admin/otp-requests"
+                    class="sidebar-link block px-5 py-4 rounded-2xl border border-cyan-500/40 hover:bg-cyan-500 hover:text-black">
+                    OTP Requests
+                </a>
+
+                <a href="/admin/aadhar-applications"
+                    class="sidebar-link block px-5 py-4 rounded-2xl border border-cyan-500/40 hover:bg-cyan-500 hover:text-black">
+                    Aadhar Applications
+                </a>
+
+                <a href="/admin/pan-applications"
+                    class="sidebar-link block px-5 py-4 rounded-2xl border border-cyan-500/40 hover:bg-cyan-500 hover:text-black">
+                    PAN Applications
+                </a>
+
+                <a href="/admin/upload-receiving"
+                    class="sidebar-link block px-5 py-4 rounded-2xl border border-cyan-500/40 hover:bg-cyan-500 hover:text-black">
+                    Upload Receiving
+                </a>
+
+                <a href="/admin/backup"
+                    class="sidebar-link block px-5 py-4 rounded-2xl border border-cyan-500/40 hover:bg-cyan-500 hover:text-black">
+                    Backup
+                </a>
+
+                <a href="/admin/settings"
+                    class="sidebar-link block px-5 py-4 rounded-2xl border border-cyan-500/40 hover:bg-cyan-500 hover:text-black">
+                    Settings
+                </a>
+
+                <a href="/admin/logout"
+                    class="sidebar-link block px-5 py-4 rounded-2xl border border-red-500/60 text-red-400 hover:bg-red-500 hover:text-white">
+                    Logout
+                </a>
+
+            </div>
+
+        </aside>
+
+        <!-- MAIN -->
+
+        <main class="flex-1 p-5 md:p-10 overflow-y-auto">
+
+            <!-- MOBILE TOP -->
+
+            <div class="md:hidden premium-card rounded-3xl p-5 mb-6 flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl font-black text-cyan-400">
+                        CyberPoint
+                    </h1>
+                    <p class="text-gray-400 text-sm">
+                        Admin Panel
+                    </p>
+                </div>
+
+                <a href="/admin/logout"
+                    class="px-4 py-3 rounded-2xl bg-red-500 text-white font-bold">
+                    Logout
+                </a>
+            </div>
+
+            <!-- HEADER -->
+
+            <div class="premium-card rounded-[32px] p-7 md:p-10">
+
+                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+
+                    <div>
+                        <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 font-bold mb-5">
+                            <span class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></span>
+                            Live Dashboard
+                        </div>
+
+                        <h2 class="text-4xl md:text-6xl font-black text-cyan-400">
+                            Welcome Admin 👋
+                        </h2>
+
+                        <p class="text-gray-400 mt-4 text-lg">
+                            CyberPoint premium control center
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4">
+                        <a href="/"
+                            target="_blank"
+                            class="premium-btn px-6 py-4 bg-cyan-500 rounded-2xl text-black font-black">
+                            View Website
+                        </a>
+
+                        <a href="/admin/advanced-search"
+                            class="premium-btn px-6 py-4 border border-cyan-500 rounded-2xl text-cyan-400 font-bold hover:bg-cyan-500 hover:text-black">
+                            Search
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- PROFILE -->
+
+            <div class="premium-card rounded-[32px] p-7 mt-8 flex flex-col md:flex-row items-center gap-7">
+
+                <% if (adminProfile && adminProfile.profileImage) { %>
+
+                    <img src="<%= adminProfile.profileImage %>"
+                        class="w-28 h-28 rounded-full object-cover border-4 border-cyan-500">
+
+                <% } else { %>
+
+                    <div class="w-28 h-28 rounded-full bg-cyan-500 text-black flex items-center justify-center text-4xl font-black">
+                        A
+                    </div>
+
+                <% } %>
+
+                <div class="flex-1 text-center md:text-left">
+
+                    <h3 class="text-3xl font-black text-cyan-400">
+                        <%= adminProfile ? adminProfile.name : "Admin" %>
+                    </h3>
+
+                    <p class="text-gray-400 mt-2">
+                        <%= adminProfile ? adminProfile.email : "admin@cyberpoint.com" %>
+                    </p>
+
+                    <p class="text-gray-300 mt-3">
+                        <%= adminProfile ? adminProfile.bio : "CyberPoint Admin" %>
+                    </p>
+
+                </div>
+
+                <a href="/admin/profile"
+                    class="premium-btn px-6 py-4 bg-cyan-500 rounded-2xl text-black font-black">
+                    Edit Profile
+                </a>
+
+            </div>
+
+            <!-- ANALYTICS -->
+
+            <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6 mt-8">
+
+                <div class="premium-card rounded-[30px] p-7">
+                    <div class="text-5xl mb-5">📊</div>
+                    <p class="text-gray-400">Total Applications</p>
+                    <h3 class="text-5xl font-black text-cyan-400 mt-4">
+                        <%= totalApplications %>
+                    </h3>
+                </div>
+
+                <div class="premium-card rounded-[30px] p-7">
+                    <div class="text-5xl mb-5">⏳</div>
+                    <p class="text-gray-400">Pending</p>
+                    <h3 class="text-5xl font-black text-yellow-400 mt-4">
+                        <%= pendingApplications %>
+                    </h3>
+                </div>
+
+                <div class="premium-card rounded-[30px] p-7">
+                    <div class="text-5xl mb-5">🔄</div>
+                    <p class="text-gray-400">Processing</p>
+                    <h3 class="text-5xl font-black text-blue-400 mt-4">
+                        <%= processingApplications %>
+                    </h3>
+                </div>
+
+                <div class="premium-card rounded-[30px] p-7">
+                    <div class="text-5xl mb-5">✅</div>
+                    <p class="text-gray-400">Completed</p>
+                    <h3 class="text-5xl font-black text-green-400 mt-4">
+                        <%= completedApplications %>
+                    </h3>
+                </div>
+
+                <div class="premium-card rounded-[30px] p-7">
+                    <div class="text-5xl mb-5">❌</div>
+                    <p class="text-gray-400">Rejected</p>
+                    <h3 class="text-5xl font-black text-red-400 mt-4">
+                        <%= rejectedApplications %>
+                    </h3>
+                </div>
+
+                <div class="premium-card rounded-[30px] p-7">
+                    <div class="text-5xl mb-5">📅</div>
+                    <p class="text-gray-400">Today Applications</p>
+                    <h3 class="text-5xl font-black text-pink-400 mt-4">
+                        <%= todayApplications %>
+                    </h3>
+                </div>
+
+                <div class="premium-card rounded-[30px] p-7 md:col-span-2">
+                    <div class="text-5xl mb-5">💰</div>
+                    <p class="text-gray-400">Total Revenue</p>
+                    <h3 class="text-5xl font-black text-emerald-400 mt-4">
+                        ₹<%= totalRevenue %>
+                    </h3>
+                </div>
+
+            </div>
+
+            <!-- QUICK ACTIONS -->
+
+            <div class="premium-card rounded-[32px] p-7 mt-8">
+
+                <h3 class="text-3xl font-black text-cyan-400">
+                    Quick Actions
+                </h3>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-5 mt-7">
+
+                    <a href="/admin/advanced-search"
+                        class="premium-btn rounded-3xl p-6 bg-black/50 border border-cyan-500/30 hover:bg-cyan-500 hover:text-black font-black">
+                        🔍 Search
+                    </a>
+
+                    <a href="/admin/otp-requests"
+                        class="premium-btn rounded-3xl p-6 bg-black/50 border border-cyan-500/30 hover:bg-cyan-500 hover:text-black font-black">
+                        🔐 OTP
+                    </a>
+
+                    <a href="/admin/aadhar-applications"
+                        class="premium-btn rounded-3xl p-6 bg-black/50 border border-cyan-500/30 hover:bg-cyan-500 hover:text-black font-black">
+                        🪪 Aadhar
+                    </a>
+
+                    <a href="/admin/pan-applications"
+                        class="premium-btn rounded-3xl p-6 bg-black/50 border border-cyan-500/30 hover:bg-cyan-500 hover:text-black font-black">
+                        💳 PAN
+                    </a>
+
+                    <a href="/admin/settings"
+                        class="premium-btn rounded-3xl p-6 bg-black/50 border border-cyan-500/30 hover:bg-cyan-500 hover:text-black font-black">
+                        ⚙️ Settings
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- RECENT APPLICATIONS -->
+
+            <div class="premium-card rounded-[32px] p-7 mt-8">
+
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+
+                    <h3 class="text-3xl font-black text-cyan-400">
+                        Recent Applications
+                    </h3>
+
+                    <a href="/admin/advanced-search"
+                        class="premium-btn px-6 py-3 bg-cyan-500 rounded-2xl text-black font-black">
+                        View All
+                    </a>
+
+                </div>
+
+                <div class="overflow-x-auto mt-8">
+
+                    <table class="w-full min-w-[760px]">
+
+                        <thead>
+                            <tr class="border-b border-cyan-500/30 text-gray-300">
+                                <th class="text-left py-4">Token</th>
+                                <th class="text-left py-4">Applicant</th>
+                                <th class="text-left py-4">Service</th>
+                                <th class="text-left py-4">Status</th>
+                                <th class="text-left py-4">Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <% if (recentApplications && recentApplications.length > 0) { %>
+
+                                <% recentApplications.forEach((app) => { %>
+
+                                    <tr class="border-b border-white/10 hover:bg-cyan-500/5 transition">
+
+                                        <td class="py-5 font-bold text-cyan-400">
+                                            <%= app.tokenNumber %>
+                                        </td>
+
+                                        <td class="py-5">
+                                            <%= app.applicantName || "-" %>
+                                        </td>
+
+                                        <td class="py-5">
+                                            <%= app.serviceType || "-" %>
+                                        </td>
+
+                                        <td class="py-5">
+                                            <span class="
+                                                px-4 py-2 rounded-full text-sm font-black
+                                                <%= app.status === 'Completed'
+                                                    ? 'bg-green-500 text-black'
+                                                    : app.status === 'Rejected'
+                                                    ? 'bg-red-500 text-white'
+                                                    : app.status === 'Processing'
+                                                    ? 'bg-blue-500 text-white'
+                                                    : 'bg-yellow-500 text-black' %>
+                                            ">
+                                                <%= app.status || "Pending" %>
+                                            </span>
+                                        </td>
+
+                                        <td class="py-5">
+                                            <a href="/admin/application/<%= app.tokenNumber %>"
+                                                class="premium-btn px-5 py-3 bg-cyan-500 rounded-xl text-black font-black">
+                                                View
+                                            </a>
+                                        </td>
+
+                                    </tr>
+
+                                <% }) %>
+
+                            <% } else { %>
+
+                                <tr>
+                                    <td colspan="5"
+                                        class="text-center py-12 text-gray-400">
+                                        No Applications Found
+                                    </td>
+                                </tr>
+
+                            <% } %>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>

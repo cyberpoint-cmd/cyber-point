@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Advanced Search</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#050816] text-white">
+
+    <div class="max-w-7xl mx-auto p-6">
+
+        <div class="flex items-center justify-between">
+
+            <div>
+                <h1 class="text-4xl font-bold text-cyan-400">
+                    Advanced Search
+                </h1>
+
+                <p class="text-gray-400 mt-3">
+                    Token, name, mobile, UTR, service aur status se search karein.
+                </p>
+            </div>
+
+            <a href="/admin/dashboard"
+                class="px-6 py-3 bg-cyan-500 rounded-2xl text-black font-bold">
+                Dashboard
+            </a>
+
+        </div>
+
+        <!-- FILTER BOX -->
+
+        <div class="bg-[#0b1120] border border-cyan-500 rounded-3xl p-6 mt-10">
+
+            <div class="grid md:grid-cols-4 gap-5">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    onkeyup="filterApplications()"
+                    placeholder="Search token / name / mobile / UTR"
+                    class="md:col-span-2 px-5 py-4 rounded-2xl bg-black border border-cyan-400 outline-none">
+
+                <select
+                    id="serviceFilter"
+                    onchange="filterApplications()"
+                    class="px-5 py-4 rounded-2xl bg-black border border-cyan-400 outline-none">
+
+                    <option value="all">All Services</option>
+                    <option value="Aadhar Update">Aadhar Update</option>
+                    <option value="New PAN">New PAN</option>
+                    <option value="PAN Correction">PAN Correction</option>
+
+                </select>
+
+                <select
+                    id="statusFilter"
+                    onchange="filterApplications()"
+                    class="px-5 py-4 rounded-2xl bg-black border border-cyan-400 outline-none">
+
+                    <option value="all">All Status</option>
+                    <option value="OTP Pending">OTP Pending</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Processing">Processing</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Rejected">Rejected</option>
+
+                </select>
+
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-5 mt-5">
+
+                <input
+                    type="date"
+                    id="dateFilter"
+                    onchange="filterApplications()"
+                    class="px-5 py-4 rounded-2xl bg-black border border-cyan-400 outline-none">
+
+                <button
+                    onclick="resetFilters()"
+                    class="px-5 py-4 bg-red-500 rounded-2xl text-white font-bold">
+
+                    Reset Filter
+
+                </button>
+
+                <div class="md:col-span-2 bg-black border border-cyan-500 rounded-2xl px-5 py-4">
+
+                    Showing:
+                    <span id="resultCount" class="text-cyan-400 font-bold">
+                        <%= applications.length %>
+                    </span>
+                    /
+                    <span class="text-cyan-400 font-bold">
+                        <%= applications.length %>
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- TABLE -->
+
+        <div class="bg-[#0b1120] border border-cyan-500 rounded-3xl mt-10 overflow-hidden">
+
+            <div class="overflow-x-auto">
+
+                <table class="w-full text-left">
+
+                    <thead class="bg-black text-cyan-400">
+
+                        <tr>
+                            <th class="p-5">Token</th>
+                            <th class="p-5">Name</th>
+                            <th class="p-5">Mobile</th>
+                            <th class="p-5">Service</th>
+                            <th class="p-5">Amount</th>
+                            <th class="p-5">UTR</th>
+                            <th class="p-5">Status</th>
+                            <th class="p-5">Date</th>
+                            <th class="p-5">Action</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <% if (applications.length === 0) { %>
+
+                            <tr>
+                                <td colspan="9" class="p-8 text-center text-gray-400">
+                                    Abhi koi application nahi hai.
+                                </td>
+                            </tr>
+
+                        <% } %>
+
+                        <% applications.forEach((application) => { %>
+
+                            <tr class="border-t border-gray-700 application-row"
+                                data-service="<%= application.serviceType || '' %>"
+                                data-status="<%= application.status || '' %>"
+                                data-date="<%= application.createdAt ? new Date(application.createdAt).toISOString().slice(0, 10) : '' %>">
+
+                                <td class="p-5 font-bold text-cyan-400">
+                                    <%= application.tokenNumber || "-" %>
+                                </td>
+
+                                <td class="p-5">
+                                    <%= application.applicantName || "-" %>
+                                </td>
+
+                                <td class="p-5">
+                                    <%= application.phoneNumber || "-" %>
+                                </td>
+
+                                <td class="p-5">
+                                    <%= application.serviceType || "-" %>
+                                </td>
+
+                                <td class="p-5">
+                                    ₹<%= application.amount || 0 %>
+                                </td>
+
+                                <td class="p-5">
+                                    <%= application.utrNumber || "-" %>
+                                </td>
+
+                                <td class="p-5">
+
+                                    <span class="px-4 py-2 rounded-full
+                                        <%= application.status === 'Completed'
+                                            ? 'bg-green-500/20 text-green-400'
+                                            : application.status === 'Rejected'
+                                            ? 'bg-red-500/20 text-red-400'
+                                            : application.status === 'Processing'
+                                            ? 'bg-blue-500/20 text-blue-400'
+                                            : application.status === 'OTP Pending'
+                                            ? 'bg-purple-500/20 text-purple-400'
+                                            : 'bg-yellow-500/20 text-yellow-400' %>">
+
+                                        <%= application.status || "Pending" %>
+
+                                    </span>
+
+                                </td>
+
+                                <td class="p-5">
+                                    <% if (application.createdAt) { %>
+                                        <%= new Date(application.createdAt).toLocaleDateString() %>
+                                    <% } else { %>
+                                        -
+                                    <% } %>
+                                </td>
+
+                                <td class="p-5">
+                                    <a href="/admin/application/<%= application.tokenNumber %>"
+                                        class="px-4 py-2 bg-cyan-500 rounded-xl text-black font-bold">
+                                        View
+                                    </a>
+                                </td>
+
+                            </tr>
+
+                        <% }) %>
+
+                    </tbody>
+
+                </table>
+
+                <div id="noResult"
+                    class="hidden p-8 text-center text-red-400 font-bold">
+                    Koi matching application nahi mila.
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        function filterApplications() {
+
+            const searchValue =
+                document.getElementById("searchInput").value.toLowerCase();
+
+            const serviceValue =
+                document.getElementById("serviceFilter").value;
+
+            const statusValue =
+                document.getElementById("statusFilter").value;
+
+            const dateValue =
+                document.getElementById("dateFilter").value;
+
+            const rows =
+                document.querySelectorAll(".application-row");
+
+            let visibleCount = 0;
+
+            rows.forEach((row) => {
+
+                const rowText =
+                    row.innerText.toLowerCase();
+
+                const rowService =
+                    row.getAttribute("data-service");
+
+                const rowStatus =
+                    row.getAttribute("data-status");
+
+                const rowDate =
+                    row.getAttribute("data-date");
+
+                const searchMatch =
+                    rowText.includes(searchValue);
+
+                const serviceMatch =
+                    serviceValue === "all" ||
+                    rowService === serviceValue;
+
+                const statusMatch =
+                    statusValue === "all" ||
+                    rowStatus === statusValue;
+
+                const dateMatch =
+                    !dateValue ||
+                    rowDate === dateValue;
+
+                if (
+                    searchMatch &&
+                    serviceMatch &&
+                    statusMatch &&
+                    dateMatch
+                ) {
+
+                    row.classList.remove("hidden");
+                    visibleCount++;
+
+                } else {
+
+                    row.classList.add("hidden");
+
+                }
+
+            });
+
+            document.getElementById("resultCount").innerText =
+                visibleCount;
+
+            const noResult =
+                document.getElementById("noResult");
+
+            if (visibleCount === 0 && rows.length > 0) {
+                noResult.classList.remove("hidden");
+            } else {
+                noResult.classList.add("hidden");
+            }
+
+        }
+
+        function resetFilters() {
+
+            document.getElementById("searchInput").value = "";
+            document.getElementById("serviceFilter").value = "all";
+            document.getElementById("statusFilter").value = "all";
+            document.getElementById("dateFilter").value = "";
+
+            filterApplications();
+
+        }
+
+    </script>
+
+</body>
+</html>

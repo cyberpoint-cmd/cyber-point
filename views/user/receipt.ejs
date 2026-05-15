@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Customer Receipt
+    </title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+
+        @media print {
+
+            .no-print {
+                display: none !important;
+            }
+
+            body {
+                background: white !important;
+            }
+
+            .receipt-box {
+                border: 2px solid #000 !important;
+                color: #000 !important;
+                background: white !important;
+            }
+
+            .print-black {
+                color: #000 !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body class="bg-[#050816] text-white min-h-screen p-5 md:p-10">
+
+    <div class="max-w-5xl mx-auto">
+
+        <div class="receipt-box bg-[#0b1120] border border-cyan-500 rounded-3xl overflow-hidden">
+
+            <!-- HEADER -->
+
+            <div class="bg-cyan-500 text-black p-8">
+
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+
+                    <div>
+
+                        <h1 class="text-4xl font-bold">
+                            <%= settings.shopName || "CyberPoint" %>
+                        </h1>
+
+                        <p class="mt-3 font-semibold">
+                            <%= settings.shopAddress || "Digital Service Center" %>
+                        </p>
+
+                        <p class="mt-2 font-semibold">
+                            WhatsApp:
+                            <%= settings.whatsappNumber || "-" %>
+                        </p>
+
+                    </div>
+
+                    <div class="bg-black text-cyan-400 px-6 py-5 rounded-3xl min-w-[260px]">
+
+                        <p class="text-sm tracking-widest">
+                            TOKEN NUMBER
+                        </p>
+
+                        <h2 class="text-2xl font-bold mt-2 break-words">
+                            <%= application.tokenNumber %>
+                        </h2>
+
+                        <p class="text-sm tracking-widest mt-5">
+                            RECEIPT NUMBER
+                        </p>
+
+                        <h2 class="text-lg font-bold mt-2 break-words">
+                            <%= application.receiptNumber || "RCPT-" + application.tokenNumber %>
+                        </h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- BODY -->
+
+            <div class="p-8">
+
+                <!-- STATUS -->
+
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+
+                    <div>
+
+                        <p class="text-gray-400 print-black">
+                            Current Status
+                        </p>
+
+                        <h2 class="text-3xl font-bold mt-3
+                            <%= application.status === 'Completed'
+                                ? 'text-green-400'
+                                : application.status === 'Rejected'
+                                ? 'text-red-400'
+                                : application.status === 'Processing'
+                                ? 'text-blue-400'
+                                : application.status === 'OTP Pending'
+                                ? 'text-purple-400'
+                                : 'text-yellow-400' %>">
+
+                            <%= application.status || "Pending" %>
+
+                        </h2>
+
+                    </div>
+
+                    <button
+                        onclick="window.print()"
+                        class="no-print px-8 py-4 bg-cyan-500 rounded-2xl text-black font-bold hover:bg-cyan-600 transition">
+
+                        Print Receipt
+
+                    </button>
+
+                </div>
+
+                <!-- MAIN DETAILS -->
+
+                <div class="grid md:grid-cols-2 gap-6 mt-10">
+
+                    <div class="bg-black border border-cyan-500 rounded-2xl p-6">
+
+                        <p class="text-gray-400">
+                            Applicant Name
+                        </p>
+
+                        <h3 class="text-2xl font-bold mt-3">
+                            <%= application.applicantName || "-" %>
+                        </h3>
+
+                    </div>
+
+                    <div class="bg-black border border-cyan-500 rounded-2xl p-6">
+
+                        <p class="text-gray-400">
+                            Mobile Number
+                        </p>
+
+                        <h3 class="text-2xl font-bold mt-3">
+                            <%= application.phoneNumber || "-" %>
+                        </h3>
+
+                    </div>
+
+                    <div class="bg-black border border-cyan-500 rounded-2xl p-6">
+
+                        <p class="text-gray-400">
+                            Service Name
+                        </p>
+
+                        <h3 class="text-2xl font-bold mt-3">
+                            <%= application.serviceType || "-" %>
+                        </h3>
+
+                    </div>
+
+                    <div class="bg-black border border-cyan-500 rounded-2xl p-6">
+
+                        <p class="text-gray-400">
+                            Service Amount
+                        </p>
+
+                        <h3 class="text-2xl font-bold text-green-400 mt-3">
+                            ₹<%= application.amount || 0 %>
+                        </h3>
+
+                    </div>
+
+                    <div class="bg-black border border-cyan-500 rounded-2xl p-6">
+
+                        <p class="text-gray-400">
+                            UTR Number
+                        </p>
+
+                        <h3 class="text-2xl font-bold mt-3 break-words">
+                            <%= application.utrNumber || "Not Submitted Yet" %>
+                        </h3>
+
+                    </div>
+
+                    <div class="bg-black border border-cyan-500 rounded-2xl p-6">
+
+                        <p class="text-gray-400">
+                            Date & Time
+                        </p>
+
+                        <h3 class="text-xl font-bold mt-3">
+
+                            <% if (application.createdAt) { %>
+
+                                <%= new Date(application.createdAt).toLocaleString() %>
+
+                            <% } else { %>
+
+                                -
+
+                            <% } %>
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+                <!-- PAYMENT DETAILS -->
+
+                <div class="bg-black border border-cyan-500 rounded-3xl p-6 mt-10">
+
+                    <h3 class="text-2xl font-bold text-cyan-400">
+                        Payment Details
+                    </h3>
+
+                    <div class="grid md:grid-cols-2 gap-6 mt-6">
+
+                        <div>
+
+                            <p class="text-gray-400">
+                                UPI ID
+                            </p>
+
+                            <h4 class="text-xl font-bold text-cyan-400 mt-2">
+                                <%= settings.upiId || "-" %>
+                            </h4>
+
+                        </div>
+
+                        <div>
+
+                            <p class="text-gray-400">
+                                Payment Number
+                            </p>
+
+                            <h4 class="text-xl font-bold text-cyan-400 mt-2">
+                                <%= settings.paymentNumber || "-" %>
+                            </h4>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- RECEIVING -->
+
+                <div class="bg-black border border-green-500 rounded-3xl p-6 mt-10">
+
+                    <h3 class="text-2xl font-bold text-green-400">
+                        Receiving PDF
+                    </h3>
+
+                    <% if (application.receivingPdf) { %>
+
+                        <div class="flex flex-wrap gap-5 mt-6">
+
+                            <a href="<%= application.receivingPdf %>"
+                                target="_blank"
+                                class="px-6 py-4 bg-green-500 rounded-2xl text-black font-bold hover:bg-green-600 transition">
+
+                                Open Receiving
+
+                            </a>
+
+                            <a href="<%= application.receivingPdf %>"
+                                download
+                                class="px-6 py-4 bg-cyan-500 rounded-2xl text-black font-bold hover:bg-cyan-600 transition">
+
+                                Download PDF
+
+                            </a>
+
+                        </div>
+
+                    <% } else { %>
+
+                        <div class="mt-6 text-yellow-400 font-bold">
+                            Receiving Pending
+                        </div>
+
+                    <% } %>
+
+                </div>
+
+                <!-- NOTICE -->
+
+                <div class="bg-yellow-500/10 border border-yellow-500 rounded-3xl p-6 mt-10">
+
+                    <h3 class="text-xl font-bold text-yellow-400">
+                        Important Notice
+                    </h3>
+
+                    <p class="text-gray-300 mt-3 leading-8">
+
+                        <%= settings.noticeText || "Please keep this receipt safe for future reference." %>
+
+                    </p>
+
+                </div>
+
+                <!-- QUICK ACTIONS -->
+
+                <div class="no-print grid md:grid-cols-3 gap-5 mt-12">
+
+                    <a href="/status-check"
+                        class="text-center py-4 bg-cyan-500 rounded-2xl text-black font-bold hover:bg-cyan-600 transition">
+
+                        Check Status
+
+                    </a>
+
+                    <% if (application.receivingPdf) { %>
+
+                        <a href="<%= application.receivingPdf %>"
+                            target="_blank"
+                            class="text-center py-4 bg-green-500 rounded-2xl text-black font-bold hover:bg-green-600 transition">
+
+                            Download Receiving
+
+                        </a>
+
+                    <% } else { %>
+
+                        <div class="text-center py-4 border border-gray-600 rounded-2xl text-gray-400">
+
+                            Receiving Pending
+
+                        </div>
+
+                    <% } %>
+
+                    <a href="/"
+                        class="text-center py-4 border border-cyan-500 rounded-2xl hover:bg-cyan-500 hover:text-black transition">
+
+                        Back Homepage
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

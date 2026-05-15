@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>PAN Correction</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-[#050816] text-white">
+
+    <%- include("../partials/navbar") %>
+
+    <div class="min-h-screen py-10 px-4">
+
+        <div class="max-w-5xl mx-auto">
+
+            <a href="/"
+                class="inline-block mb-6 text-cyan-400 hover:text-cyan-300">
+
+                ← Back To Home
+
+            </a>
+
+            <form
+                action="/save-pan-correction"
+                method="POST"
+                enctype="multipart/form-data">
+
+                <div class="bg-[#0b1120] border border-cyan-500 rounded-3xl p-6 md:p-10 shadow-2xl">
+
+                    <div class="text-center">
+
+                        <h1 class="text-4xl font-bold text-cyan-400">
+                            PAN Correction
+                        </h1>
+
+                        <p class="mt-4 text-gray-300">
+                            Update / Correction in PAN Card
+                        </p>
+
+                    </div>
+
+                    <!-- STEP INDICATOR -->
+
+                    <div class="flex items-center justify-between mt-12 mb-10">
+
+                        <div class="flex-1 text-center">
+
+                            <div id="circle1"
+                                class="w-12 h-12 mx-auto rounded-full bg-cyan-500 flex items-center justify-center font-bold">
+                                1
+                            </div>
+
+                            <p class="mt-2 text-sm">
+                                Details
+                            </p>
+
+                        </div>
+
+                        <div class="flex-1 h-1 bg-gray-700"></div>
+
+                        <div class="flex-1 text-center">
+
+                            <div id="circle2"
+                                class="w-12 h-12 mx-auto rounded-full bg-gray-700 flex items-center justify-center font-bold">
+                                2
+                            </div>
+
+                            <p class="mt-2 text-sm">
+                                Upload
+                            </p>
+
+                        </div>
+
+                        <div class="flex-1 h-1 bg-gray-700"></div>
+
+                        <div class="flex-1 text-center">
+
+                            <div id="circle3"
+                                class="w-12 h-12 mx-auto rounded-full bg-gray-700 flex items-center justify-center font-bold">
+                                3
+                            </div>
+
+                            <p class="mt-2 text-sm">
+                                Payment
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <!-- STEP 1 -->
+
+                    <div id="step1">
+
+                        <h2 class="text-2xl font-bold text-cyan-400 mb-6">
+                            Personal Details
+                        </h2>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+
+                            <input
+                                type="text"
+                                name="applicantName"
+                                required
+                                placeholder="Applicant Name"
+                                class="px-4 py-3 rounded-xl bg-black border border-cyan-400 outline-none">
+
+                            <input
+                                type="text"
+                                name="fatherName"
+                                required
+                                placeholder="Father Name"
+                                class="px-4 py-3 rounded-xl bg-black border border-cyan-400 outline-none">
+
+                            <input
+                                type="text"
+                                name="motherName"
+                                required
+                                placeholder="Mother Name"
+                                class="px-4 py-3 rounded-xl bg-black border border-cyan-400 outline-none">
+
+                            <input
+                                type="text"
+                                name="phoneNumber"
+                                required
+                                placeholder="Phone Number"
+                                class="px-4 py-3 rounded-xl bg-black border border-cyan-400 outline-none">
+
+                            <input
+                                type="text"
+                                name="panNumber"
+                                required
+                                placeholder="PAN Number"
+                                class="px-4 py-3 rounded-xl bg-black border border-cyan-400 outline-none">
+
+                            <input
+                                type="text"
+                                name="ghar"
+                                placeholder="Ghar"
+                                class="px-4 py-3 rounded-xl bg-black border border-cyan-400 outline-none">
+
+                            <input
+                                type="text"
+                                name="wardNo"
+                                placeholder="Ward Number"
+                                class="px-4 py-3 rounded-xl bg-black border border-cyan-400 outline-none">
+
+                            <input
+                                type="text"
+                                name="thana"
+                                placeholder="Thana"
+                                class="px-4 py-3 rounded-xl bg-black border border-cyan-400 outline-none">
+
+                            <input
+                                type="text"
+                                name="district"
+                                placeholder="District"
+                                class="px-4 py-3 rounded-xl bg-black border border-cyan-400 outline-none">
+
+                            <input
+                                type="text"
+                                name="state"
+                                placeholder="State"
+                                class="px-4 py-3 rounded-xl bg-black border border-cyan-400 outline-none">
+
+                        </div>
+
+                        <button
+                            type="button"
+                            onclick="nextStep(2)"
+                            class="mt-10 px-8 py-3 bg-cyan-500 rounded-xl hover:bg-cyan-600">
+
+                            Next
+
+                        </button>
+
+                    </div>
+
+                    <!-- STEP 2 -->
+
+                    <div id="step2" class="hidden">
+
+                        <h2 class="text-2xl font-bold text-cyan-400 mb-6">
+                            Upload Documents
+                        </h2>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+
+                            <div>
+
+                                <label class="block mb-2">
+                                    Upload PAN Card
+                                </label>
+
+                                <input
+                                    type="file"
+                                    name="panCardFile"
+                                    accept=".jpg,.jpeg,.png,.pdf"
+                                    required
+                                    class="w-full bg-black border border-cyan-400 rounded-xl p-3">
+
+                            </div>
+
+                            <div>
+
+                                <label class="block mb-2">
+                                    Aadhar Front
+                                </label>
+
+                                <input
+                                    type="file"
+                                    name="aadharFront"
+                                    accept=".jpg,.jpeg,.png,.pdf"
+                                    required
+                                    class="w-full bg-black border border-cyan-400 rounded-xl p-3">
+
+                            </div>
+
+                            <div>
+
+                                <label class="block mb-2">
+                                    Aadhar Back
+                                </label>
+
+                                <input
+                                    type="file"
+                                    name="aadharBack"
+                                    accept=".jpg,.jpeg,.png,.pdf"
+                                    required
+                                    class="w-full bg-black border border-cyan-400 rounded-xl p-3">
+
+                            </div>
+
+                            <div>
+
+                                <label class="block mb-2">
+                                    Select Other Document
+                                </label>
+
+                                <select
+                                    name="otherDocumentType"
+                                    class="w-full px-4 py-3 rounded-xl bg-black border border-cyan-400 outline-none">
+
+                                    <option value="10th Marksheet">
+                                        10th Marksheet
+                                    </option>
+
+                                    <option value="Janm Praman Patra">
+                                        Janm Praman Patra
+                                    </option>
+
+                                    <option value="e-Shram Card">
+                                        e-Shram Card
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <div>
+
+                                <label class="block mb-2">
+                                    Upload Other Document
+                                </label>
+
+                                <input
+                                    type="file"
+                                    name="otherDocumentFile"
+                                    accept=".jpg,.jpeg,.png,.pdf"
+                                    required
+                                    class="w-full bg-black border border-cyan-400 rounded-xl p-3">
+
+                            </div>
+
+                            <div>
+
+                                <label class="block mb-2">
+                                    Upload Clear Photo
+                                </label>
+
+                                <input
+                                    type="file"
+                                    name="photo"
+                                    accept=".jpg,.jpeg,.png"
+                                    required
+                                    class="w-full bg-black border border-cyan-400 rounded-xl p-3">
+
+                            </div>
+
+                        </div>
+
+                        <div class="mt-10 flex gap-4">
+
+                            <button
+                                type="button"
+                                onclick="prevStep(1)"
+                                class="px-8 py-3 border border-cyan-400 rounded-xl">
+
+                                Back
+
+                            </button>
+
+                            <button
+                                type="button"
+                                onclick="nextStep(3)"
+                                class="px-8 py-3 bg-cyan-500 rounded-xl hover:bg-cyan-600">
+
+                                Next
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <!-- STEP 3 -->
+
+                    <div id="step3" class="hidden">
+
+                        <h2 class="text-2xl font-bold text-cyan-400 mb-6">
+                            Payment
+                        </h2>
+
+                        <div class="bg-black border border-cyan-400 rounded-2xl p-6">
+
+                            <p class="text-xl">
+                                Service Charge
+                            </p>
+
+                            <h3 class="text-5xl font-bold text-cyan-400 mt-4">
+                                ₹<%= settings.prices.panCorrection %>
+                            </h3>
+
+                            <div class="mt-8">
+
+                                <% if (settings.qrImage) { %>
+
+                                    <img
+                                        src="<%= settings.qrImage %>"
+                                        class="rounded-xl mx-auto w-64 border border-cyan-500">
+
+                                <% } else { %>
+
+                                    <img
+                                        src="https://dummyimage.com/250x250/00bcd4/000000&text=QR+CODE"
+                                        class="rounded-xl mx-auto">
+
+                                <% } %>
+
+                            </div>
+
+                            <div class="mt-6 text-center">
+
+                                <p class="text-gray-400">
+                                    UPI ID
+                                </p>
+
+                                <h3 class="text-2xl text-cyan-400 font-bold mt-2">
+                                    <%= settings.upiId %>
+                                </h3>
+
+                                <p class="text-gray-400 mt-4">
+                                    Payment Number
+                                </p>
+
+                                <h3 class="text-xl text-cyan-400 font-bold mt-2">
+                                    <%= settings.paymentNumber %>
+                                </h3>
+
+                            </div>
+
+                            <div class="mt-8">
+
+                                <label class="block mb-2">
+                                    Enter UTR Number
+                                </label>
+
+                                <input
+                                    type="text"
+                                    name="utrNumber"
+                                    required
+                                    class="w-full px-4 py-3 rounded-xl bg-[#050816] border border-cyan-400 outline-none">
+
+                            </div>
+
+                        </div>
+
+                        <div class="mt-10 flex gap-4">
+
+                            <button
+                                type="button"
+                                onclick="prevStep(2)"
+                                class="px-8 py-3 border border-cyan-400 rounded-xl">
+
+                                Back
+
+                            </button>
+
+                            <button
+                                type="submit"
+                                class="px-8 py-3 bg-cyan-500 rounded-xl hover:bg-cyan-600">
+
+                                Submit Application
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <%- include("../partials/footer") %>
+
+    <script>
+
+        function nextStep(step) {
+
+            document.getElementById("step1").classList.add("hidden");
+            document.getElementById("step2").classList.add("hidden");
+            document.getElementById("step3").classList.add("hidden");
+
+            document.getElementById("step" + step).classList.remove("hidden");
+
+            updateCircles(step);
+
+        }
+
+        function prevStep(step) {
+
+            nextStep(step);
+
+        }
+
+        function updateCircles(step) {
+
+            for (let i = 1; i <= 3; i++) {
+
+                const circle =
+                    document.getElementById("circle" + i);
+
+                if (i <= step) {
+
+                    circle.classList.remove("bg-gray-700");
+                    circle.classList.add("bg-cyan-500");
+
+                } else {
+
+                    circle.classList.remove("bg-cyan-500");
+                    circle.classList.add("bg-gray-700");
+
+                }
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

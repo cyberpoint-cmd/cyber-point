@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Aadhar Update</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-[#050816] text-white">
+
+    <%- include("../partials/navbar") %>
+
+    <div class="min-h-screen py-10 px-4">
+
+        <div class="max-w-4xl mx-auto">
+
+            <a href="/"
+                class="inline-block mb-6 text-cyan-400 hover:text-cyan-300">
+
+                ← Back To Home
+
+            </a>
+
+            <form
+                action="/complete-aadhar"
+                method="POST"
+                onsubmit="return prepareOtpSubmit()">
+
+                <input
+                    type="hidden"
+                    name="tokenNumber"
+                    id="tokenNumber">
+
+                <input
+                    type="hidden"
+                    name="applicantOtp"
+                    id="applicantOtp">
+
+                <input
+                    type="hidden"
+                    name="relationOtp"
+                    id="relationOtp">
+
+                <div class="bg-[#0b1120] border border-cyan-500 rounded-3xl p-6 md:p-10 shadow-2xl">
+
+                    <div class="text-center">
+
+                        <h1 class="text-4xl font-bold text-cyan-400">
+                            Aadhar Address Change
+                        </h1>
+
+                        <p class="mt-4 text-gray-300">
+                            Details submit hote hi admin ko OTP request mil jayega.
+                        </p>
+
+                    </div>
+
+                    <!-- TOKEN BOX -->
+
+                    <div id="tokenBox"
+                        class="hidden mt-8 bg-green-500/10 border border-green-500 rounded-2xl p-5 text-center">
+
+                        <p class="text-green-400 font-bold">
+                            Your Token Number
+                        </p>
+
+                        <h2 id="tokenShow"
+                            class="text-3xl font-bold text-green-400 mt-2">
+                        </h2>
+
+                    </div>
+
+                    <!-- STEP INDICATOR -->
+
+                    <div class="flex items-center justify-between mt-12 mb-10 text-xs md:text-sm">
+
+                        <div class="flex-1 text-center">
+
+                            <div id="circle1"
+                                class="w-10 h-10 md:w-12 md:h-12 mx-auto rounded-full bg-cyan-500 flex items-center justify-center font-bold">
+
+                                1
+
+                            </div>
+
+                            <p class="mt-2">
+                                Details
+                            </p>
+
+                        </div>
+
+                        <div class="flex-1 h-1 bg-gray-700"></div>
+
+                        <div class="flex-1 text-center">
+
+                            <div id="circle2"
+                                class="w-10 h-10 md:w-12 md:h-12 mx-auto rounded-full bg-gray-700 flex items-center justify-center font-bold">
+
+                                2
+
+                            </div>
+
+                            <p class="mt-2">
+                                Applicant OTP
+                            </p>
+
+                        </div>
+
+                        <div class="flex-1 h-1 bg-gray-700"></div>
+
+                        <div class="flex-1 text-center">
+
+                            <div id="circle3"
+                                class="w-10 h-10 md:w-12 md:h-12 mx-auto rounded-full bg-gray-700 flex items-center justify-center font-bold">
+
+                                3
+
+                            </div>
+
+                            <p class="mt-2">
+                                Father OTP
+                            </p>
+
+                        </div>
+
+                        <div class="flex-1 h-1 bg-gray-700"></div>
+
+                        <div class="flex-1 text-center">
+
+                            <div id="circle4"
+                                class="w-10 h-10 md:w-12 md:h-12 mx-auto rounded-full bg-gray-700 flex items-center justify-center font-bold">
+
+                                4
+
+                            </div>
+
+                            <p class="mt-2">
+                                Payment
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <!-- STEP 1 -->
+
+                    <div id="step1">
+
+                        <h2 class="text-2xl font-bold text-cyan-400 mb-6">
+                            Applicant Details
+                        </h2>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+
+                            <div>
+
+                                <label class="block mb-2">
+                                    Applicant Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="applicantName"
+                                    required
+                                    class="w-full px-4 py-3 rounded-xl bg-black border border-cyan-400 outline-none">
+
+                            </div>
+
+                            <div>
+
+                                <label class="block mb-2">
+                                    Phone Number
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="phoneNumber"
+                                    required
+                                    class="w-full px-4 py-3 rounded-xl bg-black border border-cyan-400 outline-none">
+
+                            </div>
+
+                            <div>
+
+                                <label class="block mb-2">
+                                    Applicant Aadhar Number
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="applicantAadhar"
+                                    required
+                                    class="w-full px-4 py-3 rounded-xl bg-black border border-cyan-400 outline-none">
+
+                            </div>
+
+                            <div>
+
+                                <label class="block mb-2">
+                                    Husband/Father Aadhar Number
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="relationAadhar"
+                                    required
+                                    class="w-full px-4 py-3 rounded-xl bg-black border border-cyan-400 outline-none">
+
+                            </div>
+
+                        </div>
+
+                        <button
+                            type="button"
+                            onclick="saveBasicDetails()"
+                            class="mt-10 px-8 py-3 bg-cyan-500 rounded-xl hover:bg-cyan-600">
+
+                            Submit Details & Next
+
+                        </button>
+
+                    </div>
+
+                    <!-- STEP 2 -->
+
+                    <div id="step2" class="hidden">
+
+                        <h2 class="text-2xl font-bold text-cyan-400 mb-3">
+                            Applicant Aadhar OTP
+                        </h2>
+
+                        <p class="text-gray-300 mb-8">
+                            Admin se Applicant OTP lene ke baad 6 digit OTP enter karein.
+                        </p>
+
+                        <div class="flex gap-3 justify-center">
+
+                            <input maxlength="1"
+                                class="otp applicant-otp w-12 h-14 text-center text-2xl rounded-xl bg-black border border-cyan-400 outline-none">
+
+                            <input maxlength="1"
+                                class="otp applicant-otp w-12 h-14 text-center text-2xl rounded-xl bg-black border border-cyan-400 outline-none">
+
+                            <input maxlength="1"
+                                class="otp applicant-otp w-12 h-14 text-center text-2xl rounded-xl bg-black border border-cyan-400 outline-none">
+
+                            <input maxlength="1"
+                                class="otp applicant-otp w-12 h-14 text-center text-2xl rounded-xl bg-black border border-cyan-400 outline-none">
+
+                            <input maxlength="1"
+                                class="otp applicant-otp w-12 h-14 text-center text-2xl rounded-xl bg-black border border-cyan-400 outline-none">
+
+                            <input maxlength="1"
+                                class="otp applicant-otp w-12 h-14 text-center text-2xl rounded-xl bg-black border border-cyan-400 outline-none">
+
+                        </div>
+
+                        <div class="mt-10 flex gap-4">
+
+                            <button
+                                type="button"
+                                onclick="prevStep(1)"
+                                class="px-8 py-3 border border-cyan-400 rounded-xl">
+
+                                Back
+
+                            </button>
+
+                            <button
+                                type="button"
+                                onclick="goApplicantOtpNext()"
+                                class="px-8 py-3 bg-cyan-500 rounded-xl hover:bg-cyan-600">
+
+                                Next
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <!-- STEP 3 -->
+
+                    <div id="step3" class="hidden">
+
+                        <h2 class="text-2xl font-bold text-cyan-400 mb-3">
+                            Father/Husband Aadhar OTP
+                        </h2>
+
+                        <p class="text-gray-300 mb-8">
+                            Admin se Father OTP lene ke baad 6 digit OTP enter karein.
+                        </p>
+
+                        <div class="flex gap-3 justify-center">
+
+                            <input maxlength="1"
+                                class="otp relation-otp w-12 h-14 text-center text-2xl rounded-xl bg-black border border-cyan-400 outline-none">
+
+                            <input maxlength="1"
+                                class="otp relation-otp w-12 h-14 text-center text-2xl rounded-xl bg-black border border-cyan-400 outline-none">
+
+                            <input maxlength="1"
+                                class="otp relation-otp w-12 h-14 text-center text-2xl rounded-xl bg-black border border-cyan-400 outline-none">
+
+                            <input maxlength="1"
+                                class="otp relation-otp w-12 h-14 text-center text-2xl rounded-xl bg-black border border-cyan-400 outline-none">
+
+                            <input maxlength="1"
+                                class="otp relation-otp w-12 h-14 text-center text-2xl rounded-xl bg-black border border-cyan-400 outline-none">
+
+                            <input maxlength="1"
+                                class="otp relation-otp w-12 h-14 text-center text-2xl rounded-xl bg-black border border-cyan-400 outline-none">
+
+                        </div>
+
+                        <div class="mt-10 flex gap-4">
+
+                            <button
+                                type="button"
+                                onclick="prevStep(2)"
+                                class="px-8 py-3 border border-cyan-400 rounded-xl">
+
+                                Back
+
+                            </button>
+
+                            <button
+                                type="button"
+                                onclick="goRelationOtpNext()"
+                                class="px-8 py-3 bg-cyan-500 rounded-xl hover:bg-cyan-600">
+
+                                Next
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <!-- STEP 4 -->
+
+                    <div id="step4" class="hidden">
+
+                        <h2 class="text-2xl font-bold text-cyan-400 mb-6">
+                            Payment
+                        </h2>
+
+                        <div class="bg-black border border-cyan-400 rounded-2xl p-6">
+
+                            <p class="text-xl">
+                                Service Charge:
+                            </p>
+
+                            <h3 class="text-5xl font-bold text-cyan-400 mt-4">
+                                ₹<%= settings.prices.aadharUpdate %>
+                            </h3>
+
+                            <!-- QR -->
+
+                            <div class="mt-8">
+
+                                <% if (settings.qrImage) { %>
+
+                                    <img
+                                        src="<%= settings.qrImage %>"
+                                        class="rounded-xl mx-auto w-64 border border-cyan-500">
+
+                                <% } else { %>
+
+                                    <img
+                                        src="https://dummyimage.com/250x250/00bcd4/000000&text=QR+CODE"
+                                        class="rounded-xl mx-auto">
+
+                                <% } %>
+
+                            </div>
+
+                            <!-- UPI -->
+
+                            <div class="mt-6 text-center">
+
+                                <p class="text-gray-400">
+                                    UPI ID
+                                </p>
+
+                                <h3 class="text-2xl text-cyan-400 font-bold mt-2">
+                                    <%= settings.upiId %>
+                                </h3>
+
+                                <p class="text-gray-400 mt-4">
+                                    Payment Number
+                                </p>
+
+                                <h3 class="text-xl text-cyan-400 font-bold mt-2">
+                                    <%= settings.paymentNumber %>
+                                </h3>
+
+                            </div>
+
+                            <!-- UTR -->
+
+                            <div class="mt-8">
+
+                                <label class="block mb-2">
+                                    Enter UTR Number
+                                </label>
+
+                                <input
+                                    type="text"
+                                    name="utrNumber"
+                                    required
+                                    class="w-full px-4 py-3 rounded-xl bg-[#050816] border border-cyan-400 outline-none">
+
+                            </div>
+
+                        </div>
+
+                        <div class="mt-10 flex gap-4">
+
+                            <button
+                                type="button"
+                                onclick="prevStep(3)"
+                                class="px-8 py-3 border border-cyan-400 rounded-xl">
+
+                                Back
+
+                            </button>
+
+                            <button
+                                type="submit"
+                                class="px-8 py-3 bg-cyan-500 rounded-xl hover:bg-cyan-600">
+
+                                Submit Application
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <%- include("../partials/footer") %>
+
+    <script>
+
+        async function saveBasicDetails() {
+
+            const applicantName =
+                document.getElementById("applicantName").value;
+
+            const phoneNumber =
+                document.getElementById("phoneNumber").value;
+
+            const applicantAadhar =
+                document.getElementById("applicantAadhar").value;
+
+            const relationAadhar =
+                document.getElementById("relationAadhar").value;
+
+            if (
+                !applicantName ||
+                !phoneNumber ||
+                !applicantAadhar ||
+                !relationAadhar
+            ) {
+
+                alert("Sabhi details fill karein.");
+
+                return;
+
+            }
+
+            const response =
+                await fetch("/save-aadhar-basic", {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        applicantName,
+                        phoneNumber,
+                        applicantAadhar,
+                        relationAadhar
+
+                    })
+
+                });
+
+            const data = await response.json();
+
+            if (!data.success) {
+
+                alert("Details save nahi hua.");
+
+                return;
+
+            }
+
+            document.getElementById("tokenNumber").value =
+                data.token;
+
+            document.getElementById("tokenShow").innerText =
+                data.token;
+
+            document.getElementById("tokenBox")
+                .classList.remove("hidden");
+
+            alert(
+                "Details admin ko mil gaya. Ab Applicant OTP enter karein."
+            );
+
+            nextStep(2);
+
+        }
+
+        function nextStep(step) {
+
+            document.getElementById("step1")
+                .classList.add("hidden");
+
+            document.getElementById("step2")
+                .classList.add("hidden");
+
+            document.getElementById("step3")
+                .classList.add("hidden");
+
+            document.getElementById("step4")
+                .classList.add("hidden");
+
+            document.getElementById("step" + step)
+                .classList.remove("hidden");
+
+            updateCircles(step);
+
+        }
+
+        function prevStep(step) {
+
+            nextStep(step);
+
+        }
+
+        function updateCircles(step) {
+
+            for (let i = 1; i <= 4; i++) {
+
+                const circle =
+                    document.getElementById("circle" + i);
+
+                if (i <= step) {
+
+                    circle.classList.remove("bg-gray-700");
+
+                    circle.classList.add("bg-cyan-500");
+
+                } else {
+
+                    circle.classList.remove("bg-cyan-500");
+
+                    circle.classList.add("bg-gray-700");
+
+                }
+
+            }
+
+        }
+
+        function getOtpValue(className) {
+
+            const inputs =
+                document.querySelectorAll("." + className);
+
+            let otp = "";
+
+            inputs.forEach((input) => {
+
+                otp += input.value;
+
+            });
+
+            return otp;
+
+        }
+
+        function goApplicantOtpNext() {
+
+            const otp =
+                getOtpValue("applicant-otp");
+
+            if (otp.length !== 6) {
+
+                alert(
+                    "Applicant OTP 6 digit ka hona chahiye."
+                );
+
+                return;
+
+            }
+
+            document.getElementById("applicantOtp").value =
+                otp;
+
+            nextStep(3);
+
+        }
+
+        function goRelationOtpNext() {
+
+            const otp =
+                getOtpValue("relation-otp");
+
+            if (otp.length !== 6) {
+
+                alert(
+                    "Father OTP 6 digit ka hona chahiye."
+                );
+
+                return;
+
+            }
+
+            document.getElementById("relationOtp").value =
+                otp;
+
+            nextStep(4);
+
+        }
+
+        function prepareOtpSubmit() {
+
+            const token =
+                document.getElementById("tokenNumber").value;
+
+            if (!token) {
+
+                alert(
+                    "Pehle details submit karke token generate karein."
+                );
+
+                return false;
+
+            }
+
+            document.getElementById("applicantOtp").value =
+                getOtpValue("applicant-otp");
+
+            document.getElementById("relationOtp").value =
+                getOtpValue("relation-otp");
+
+            return true;
+
+        }
+
+        document.querySelectorAll(".otp")
+            .forEach((input, index, inputs) => {
+
+                input.addEventListener("input", () => {
+
+                    input.value =
+                        input.value.replace(/[^0-9]/g, "");
+
+                    if (
+                        input.value.length === 1 &&
+                        inputs[index + 1]
+                    ) {
+
+                        inputs[index + 1].focus();
+
+                    }
+
+                });
+
+                input.addEventListener("keydown", (event) => {
+
+                    if (
+                        event.key === "Backspace" &&
+                        input.value === "" &&
+                        inputs[index - 1]
+                    ) {
+
+                        inputs[index - 1].focus();
+
+                    }
+
+                });
+
+            });
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        <%= settings && settings.shopName ? settings.shopName : "CyberPoint" %>
+    </title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f4f7fb;
+            overflow-x: hidden;
+        }
+
+        .top-gradient {
+            background: linear-gradient(90deg, #021b79, #0575e6);
+        }
+
+        .hero-gradient {
+            background:
+                linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)),
+                url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .service-card {
+            transition: 0.35s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .glow-btn {
+            box-shadow: 0 0 25px rgba(14,165,233,0.45);
+        }
+
+        .main-btn {
+            transition: 0.3s;
+        }
+
+        .main-btn:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+
+            .hero-gradient {
+                min-height: auto;
+            }
+
+            .mobile-card {
+                border-radius: 28px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- TOP BAR -->
+
+    <div class="bg-white border-b">
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-5 py-4 flex items-center justify-between gap-4">
+
+            <div class="flex items-center gap-3 min-w-0">
+
+                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-blue-900 text-white flex items-center justify-center text-xl sm:text-2xl font-black flex-shrink-0">
+                    CP
+                </div>
+
+                <div class="min-w-0">
+
+                    <h2 class="text-xl sm:text-2xl md:text-4xl font-black text-blue-900 truncate">
+                        <%= settings && settings.shopName ? settings.shopName : "CyberPoint" %>
+                    </h2>
+
+                    <p class="text-gray-500 text-xs sm:text-sm truncate">
+                        Premium Digital Service Portal
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="hidden md:flex items-center gap-5">
+
+                <a href="/status-check"
+                    class="px-6 py-3 rounded-xl border-2 border-blue-600 text-blue-700 font-bold hover:bg-blue-600 hover:text-white transition">
+
+                    Status Check
+
+                </a>
+
+                <a href="/admin/login"
+                    class="px-6 py-3 rounded-xl bg-blue-700 text-white font-black hover:bg-black transition">
+
+                    Admin Login
+
+                </a>
+
+            </div>
+
+            <a href="/status-check"
+                class="md:hidden px-4 py-3 rounded-xl bg-blue-700 text-white text-sm font-black flex-shrink-0">
+
+                Status
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- NAVBAR -->
+
+    <div class="top-gradient sticky top-0 z-50 shadow-lg">
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-5 py-3 overflow-x-auto">
+
+            <div class="flex gap-3 sm:gap-6 text-white font-semibold text-sm sm:text-lg whitespace-nowrap">
+
+                <a href="#services"
+                    class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 transition">
+
+                    Services
+
+                </a>
+
+                <a href="#links"
+                    class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 transition">
+
+                    Important Links
+
+                </a>
+
+                <a href="#contact"
+                    class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 transition">
+
+                    Contact
+
+                </a>
+
+                <a href="/admin/login"
+                    class="md:hidden px-4 py-2 rounded-xl bg-cyan-400 text-black font-black">
+
+                    Admin
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- HERO SECTION -->
+
+    <section class="hero-gradient min-h-[85vh] flex items-center">
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-5 py-12 sm:py-16 grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+
+            <!-- LEFT -->
+
+            <div>
+
+                <div class="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 sm:px-5 py-3 rounded-full border border-white/20 mb-6 sm:mb-8">
+
+                    <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse flex-shrink-0"></div>
+
+                    <span class="text-white font-semibold tracking-wider text-xs sm:text-sm">
+
+                        PREMIUM GOVERNMENT SERVICE PORTAL
+
+                    </span>
+
+                </div>
+
+                <h1 class="text-4xl sm:text-5xl md:text-7xl font-black text-white leading-tight">
+
+                    Fast, Secure &
+                    <span class="text-cyan-300 block">
+                        Premium
+                    </span>
+
+                    Online Services
+
+                </h1>
+
+                <p class="text-white/80 text-base sm:text-xl mt-6 sm:mt-8 leading-8 sm:leading-9 max-w-2xl">
+
+                    <%= settings && settings.noticeText ? settings.noticeText : "Aadhar, PAN, Certificate aur Government Online Services ka premium digital solution." %>
+
+                </p>
+
+                <div class="grid sm:flex gap-4 sm:gap-5 mt-8 sm:mt-10">
+
+                    <a href="#services"
+                        class="main-btn text-center px-8 sm:px-10 py-4 sm:py-5 rounded-2xl bg-cyan-400 text-black font-black text-base sm:text-lg glow-btn">
+
+                        Explore Services
+
+                    </a>
+
+                    <a href="https://wa.me/<%= settings && settings.whatsappNumber ? settings.whatsappNumber : '' %>"
+                        target="_blank"
+                        class="main-btn text-center px-8 sm:px-10 py-4 sm:py-5 rounded-2xl bg-green-500 text-black font-black text-base sm:text-lg">
+
+                        WhatsApp
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- RIGHT -->
+
+            <div class="bg-white rounded-[28px] sm:rounded-[35px] shadow-2xl p-6 sm:p-10 mobile-card">
+
+                <h2 class="text-3xl sm:text-4xl font-black text-blue-900 text-center">
+                    Welcome
+                </h2>
+
+                <div class="w-32 h-32 sm:w-44 sm:h-44 rounded-full bg-blue-100 mx-auto mt-6 sm:mt-8 flex items-center justify-center text-5xl sm:text-7xl">
+                    🔐
+                </div>
+
+                <div class="mt-8 sm:mt-10 space-y-4 sm:space-y-5">
+
+                    <a href="/aadhar-update"
+                        class="block w-full text-center py-4 sm:py-5 rounded-2xl bg-blue-700 text-white text-lg sm:text-xl font-black hover:bg-black transition">
+
+                        Aadhar Update
+
+                    </a>
+
+                    <a href="/new-pan"
+                        class="block w-full text-center py-4 sm:py-5 rounded-2xl bg-cyan-500 text-black text-lg sm:text-xl font-black hover:bg-black hover:text-white transition">
+
+                        New PAN Card
+
+                    </a>
+
+                    <a href="/pan-correction"
+                        class="block w-full text-center py-4 sm:py-5 rounded-2xl bg-green-500 text-black text-lg sm:text-xl font-black hover:bg-black hover:text-white transition">
+
+                        PAN Correction
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- SERVICES -->
+
+    <section id="services" class="py-16 sm:py-24">
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-5">
+
+            <div class="text-center mb-12 sm:mb-20">
+
+                <h2 class="text-4xl sm:text-5xl md:text-6xl font-black text-blue-900">
+
+                    Premium Services
+
+                </h2>
+
+                <p class="text-gray-500 text-base sm:text-xl mt-4 sm:mt-6">
+                    Select your service and apply online instantly.
+                </p>
+
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10">
+
+                <div class="service-card bg-white rounded-[28px] sm:rounded-[35px] p-6 sm:p-10 border shadow-sm">
+
+                    <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-cyan-100 flex items-center justify-center text-4xl sm:text-5xl">
+                        🪪
+                    </div>
+
+                    <h3 class="text-2xl sm:text-3xl font-black text-blue-900 mt-6 sm:mt-8">
+                        Aadhar Update
+                    </h3>
+
+                    <p class="text-gray-500 mt-4 sm:mt-5 leading-7 sm:leading-8">
+                        Mobile number update, address correction and OTP support.
+                    </p>
+
+                    <a href="/aadhar-update"
+                        class="block text-center mt-6 sm:mt-8 py-4 sm:py-5 rounded-2xl bg-cyan-500 text-black font-black text-base sm:text-lg hover:bg-black hover:text-white transition">
+
+                        Apply Now
+
+                    </a>
+
+                </div>
+
+                <div class="service-card bg-white rounded-[28px] sm:rounded-[35px] p-6 sm:p-10 border shadow-sm">
+
+                    <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-purple-100 flex items-center justify-center text-4xl sm:text-5xl">
+                        💳
+                    </div>
+
+                    <h3 class="text-2xl sm:text-3xl font-black text-blue-900 mt-6 sm:mt-8">
+                        New PAN Card
+                    </h3>
+
+                    <p class="text-gray-500 mt-4 sm:mt-5 leading-7 sm:leading-8">
+                        Instant PAN application with secure upload system.
+                    </p>
+
+                    <a href="/new-pan"
+                        class="block text-center mt-6 sm:mt-8 py-4 sm:py-5 rounded-2xl bg-purple-500 text-white font-black text-base sm:text-lg hover:bg-black transition">
+
+                        Apply Now
+
+                    </a>
+
+                </div>
+
+                <div class="service-card bg-white rounded-[28px] sm:rounded-[35px] p-6 sm:p-10 border shadow-sm md:col-span-2 lg:col-span-1">
+
+                    <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-green-100 flex items-center justify-center text-4xl sm:text-5xl">
+                        📄
+                    </div>
+
+                    <h3 class="text-2xl sm:text-3xl font-black text-blue-900 mt-6 sm:mt-8">
+                        PAN Correction
+                    </h3>
+
+                    <p class="text-gray-500 mt-4 sm:mt-5 leading-7 sm:leading-8">
+                        Name, DOB, address and correction services.
+                    </p>
+
+                    <a href="/pan-correction"
+                        class="block text-center mt-6 sm:mt-8 py-4 sm:py-5 rounded-2xl bg-green-500 text-black font-black text-base sm:text-lg hover:bg-black hover:text-white transition">
+
+                        Apply Now
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- IMPORTANT LINKS -->
+
+    <section id="links" class="py-16 sm:py-24 bg-white">
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-5">
+
+            <div class="text-center mb-12 sm:mb-20">
+
+                <h2 class="text-4xl sm:text-5xl md:text-6xl font-black text-blue-900">
+
+                    Important Websites
+
+                </h2>
+
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-8">
+
+                <% if (settings && settings.importantLinks && settings.importantLinks.length > 0) { %>
+
+                    <% settings.importantLinks.forEach((link) => { %>
+
+                        <a href="<%= link.url %>"
+                            target="_blank"
+                            class="service-card bg-[#f7fbff] border rounded-[28px] sm:rounded-[30px] p-6 sm:p-8 text-center">
+
+                            <div class="text-5xl sm:text-6xl">
+                                🌐
+                            </div>
+
+                            <h3 class="text-xl sm:text-2xl font-black text-blue-900 mt-5 sm:mt-6">
+                                <%= link.title %>
+                            </h3>
+
+                            <p class="text-gray-500 mt-3">
+                                <%= link.category || "General" %>
+                            </p>
+
+                        </a>
+
+                    <% }) %>
+
+                <% } else { %>
+
+                    <div class="bg-[#f7fbff] border rounded-[28px] p-8 text-center sm:col-span-2 lg:col-span-4">
+
+                        <div class="text-6xl">
+                            🔗
+                        </div>
+
+                        <h3 class="text-2xl font-black text-blue-900 mt-5">
+                            Important links will be updated soon.
+                        </h3>
+
+                    </div>
+
+                <% } %>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- CONTACT -->
+
+    <section id="contact" class="py-16 sm:py-24 bg-[#021b79]">
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-5">
+
+            <div class="bg-white rounded-[28px] sm:rounded-[40px] p-6 sm:p-12 text-center shadow-2xl">
+
+                <h2 class="text-4xl sm:text-5xl font-black text-blue-900">
+
+                    Contact Us
+
+                </h2>
+
+                <p class="text-gray-600 text-base sm:text-xl mt-6 sm:mt-8 leading-8 sm:leading-9 break-words">
+
+                    <%= settings && settings.shopAddress ? settings.shopAddress : "Digital Service Center" %>
+
+                </p>
+
+                <div class="grid sm:flex justify-center gap-4 sm:gap-5 mt-8 sm:mt-10">
+
+                    <a href="https://wa.me/<%= settings && settings.whatsappNumber ? settings.whatsappNumber : '' %>"
+                        target="_blank"
+                        class="text-center px-8 sm:px-10 py-4 sm:py-5 rounded-2xl bg-green-500 text-black font-black text-base sm:text-lg hover:bg-black hover:text-white transition">
+
+                        WhatsApp Now
+
+                    </a>
+
+                    <a href="/status-check"
+                        class="text-center px-8 sm:px-10 py-4 sm:py-5 rounded-2xl bg-blue-700 text-white font-black text-base sm:text-lg hover:bg-black transition">
+
+                        Check Status
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- MOBILE BOTTOM BAR -->
+
+    <div class="fixed bottom-0 left-0 right-0 z-50 bg-white border-t shadow-2xl md:hidden">
+
+        <div class="grid grid-cols-4 text-center text-xs font-black">
+
+            <a href="/"
+                class="py-3 text-blue-900">
+
+                🏠<br>Home
+
+            </a>
+
+            <a href="#services"
+                class="py-3 text-blue-900">
+
+                🧾<br>Services
+
+            </a>
+
+            <a href="/status-check"
+                class="py-3 text-blue-900">
+
+                🔎<br>Status
+
+            </a>
+
+            <a href="https://wa.me/<%= settings && settings.whatsappNumber ? settings.whatsappNumber : '' %>"
+                target="_blank"
+                class="py-3 text-green-600">
+
+                💬<br>Chat
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <footer class="bg-black py-10 mb-16 md:mb-0 text-center text-gray-400">
+
+        <h2 class="text-3xl font-black text-cyan-400">
+
+            <%= settings && settings.shopName ? settings.shopName : "CyberPoint" %>
+
+        </h2>
+
+        <p class="mt-4">
+            © 2026 Premium Digital Service Portal
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

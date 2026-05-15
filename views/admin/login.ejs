@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#050816] text-white min-h-screen flex items-center justify-center px-4">
+
+    <div class="w-full max-w-md bg-[#0b1120] border border-cyan-500 rounded-3xl p-8 shadow-2xl">
+
+        <div class="text-center">
+            <h1 class="text-4xl font-bold text-cyan-400">CyberPoint</h1>
+            <p class="text-gray-400 mt-3">Admin Login Panel</p>
+        </div>
+
+        <% if (error) { %>
+            <div class="mt-6 bg-red-500/20 border border-red-500 text-red-400 rounded-2xl p-4 text-center font-bold">
+                <%= error %>
+            </div>
+        <% } %>
+
+        <form action="/admin/login" method="POST" class="mt-8 space-y-6">
+
+            <input
+                type="text"
+                name="username"
+                required
+                placeholder="Username"
+                class="w-full px-5 py-4 rounded-2xl bg-black border border-cyan-400 outline-none">
+
+            <input
+                type="password"
+                name="password"
+                required
+                placeholder="Password"
+                class="w-full px-5 py-4 rounded-2xl bg-black border border-cyan-400 outline-none">
+
+            <button
+                type="submit"
+                class="w-full py-4 bg-cyan-500 rounded-2xl text-black font-bold hover:bg-cyan-600 transition">
+                Login
+            </button>
+
+        </form>
+
+        <a href="/" class="block text-center mt-6 text-cyan-400 hover:text-cyan-300">
+            ← Back To Website
+        </a>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+<footer class="bg-black border-t border-cyan-500 mt-20">
+
+    <div class="max-w-7xl mx-auto px-4 py-12">
+
+        <div class="grid md:grid-cols-4 gap-10">
+
+            <!-- BRAND -->
+
+            <div>
+
+                <h2 class="text-3xl font-bold text-cyan-400">
+                    <%= settings.shopName || "CyberPoint" %>
+                </h2>
+
+                <p class="text-gray-400 mt-4 leading-relaxed">
+                    <%= settings.noticeText || "Fast, secure and trusted digital service center." %>
+                </p>
+
+                <p class="text-gray-400 mt-4">
+                    <%= settings.shopAddress || "Digital Service Center" %>
+                </p>
+
+            </div>
+
+            <!-- SERVICES -->
+
+            <div>
+
+                <h3 class="text-xl font-bold text-cyan-400">
+                    Services
+                </h3>
+
+                <div class="mt-5 space-y-3 text-gray-400">
+
+                    <a href="/aadhar-update"
+                        class="block hover:text-cyan-400 transition">
+                        Aadhar Update
+                    </a>
+
+                    <a href="/new-pan"
+                        class="block hover:text-cyan-400 transition">
+                        New PAN Card
+                    </a>
+
+                    <a href="/pan-correction"
+                        class="block hover:text-cyan-400 transition">
+                        PAN Correction
+                    </a>
+
+                    <a href="/status-check"
+                        class="block hover:text-cyan-400 transition">
+                        Status Check
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- IMPORTANT LINKS -->
+
+            <div>
+
+                <h3 class="text-xl font-bold text-cyan-400">
+                    Important Links
+                </h3>
+
+                <div class="mt-5 space-y-3 text-gray-400">
+
+                    <% if (settings.importantLinks && settings.importantLinks.length > 0) { %>
+
+                        <% settings.importantLinks.slice(0, 5).forEach((link) => { %>
+
+                            <a href="<%= link.url %>"
+                                target="_blank"
+                                class="block hover:text-cyan-400 transition">
+
+                                <%= link.title %>
+
+                            </a>
+
+                        <% }) %>
+
+                    <% } else { %>
+
+                        <p>
+                            Links will be updated soon.
+                        </p>
+
+                    <% } %>
+
+                </div>
+
+            </div>
+
+            <!-- CONTACT -->
+
+            <div>
+
+                <h3 class="text-xl font-bold text-cyan-400">
+                    Contact & Payment
+                </h3>
+
+                <div class="mt-5 space-y-4 text-gray-400">
+
+                    <p>
+                        WhatsApp:
+                        <span class="text-green-400 font-bold">
+                            <%= settings.whatsappNumber || "-" %>
+                        </span>
+                    </p>
+
+                    <p>
+                        Payment Number:
+                        <span class="text-cyan-400 font-bold">
+                            <%= settings.paymentNumber || "-" %>
+                        </span>
+                    </p>
+
+                    <p>
+                        UPI:
+                        <span class="text-cyan-400 font-bold">
+                            <%= settings.upiId || "-" %>
+                        </span>
+                    </p>
+
+                    <a href="https://wa.me/<%= settings.whatsappNumber || '' %>"
+                        target="_blank"
+                        class="inline-block px-6 py-3 bg-green-500 rounded-2xl text-black font-bold hover:bg-green-600 transition">
+
+                        WhatsApp Support
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="border-t border-gray-800 mt-12 pt-6 text-center text-gray-500">
+
+            <p>
+                © <%= new Date().getFullYear() %>
+                <%= settings.shopName || "CyberPoint" %>.
+                All Rights Reserved.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>

@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Settings</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#050816] text-white">
+
+    <div class="flex min-h-screen">
+
+        <!-- SIDEBAR -->
+
+        <aside class="w-72 bg-black border-r border-cyan-500 p-6 hidden md:block">
+
+            <h1 class="text-4xl font-bold text-cyan-400">
+                CyberPoint
+            </h1>
+
+            <p class="text-gray-400 mt-2">
+                Admin Panel
+            </p>
+
+            <div class="mt-12 space-y-4">
+
+                <a href="/admin/dashboard"
+                    class="block px-5 py-4 rounded-2xl border border-cyan-500 hover:bg-cyan-500 hover:text-black transition">
+                    Dashboard
+                </a>
+
+                <a href="/admin/otp-requests"
+                    class="block px-5 py-4 rounded-2xl border border-cyan-500 hover:bg-cyan-500 hover:text-black transition">
+                    Live OTP Requests
+                </a>
+
+                <a href="/admin/aadhar-applications"
+                    class="block px-5 py-4 rounded-2xl border border-cyan-500 hover:bg-cyan-500 hover:text-black transition">
+                    Aadhar Applications
+                </a>
+
+                <a href="/admin/pan-applications"
+                    class="block px-5 py-4 rounded-2xl border border-cyan-500 hover:bg-cyan-500 hover:text-black transition">
+                    PAN Applications
+                </a>
+
+                <a href="/admin/upload-receiving"
+                    class="block px-5 py-4 rounded-2xl border border-cyan-500 hover:bg-cyan-500 hover:text-black transition">
+                    Upload Receiving
+                </a>
+
+                <a href="/admin/backup"
+                    class="block px-5 py-4 rounded-2xl border border-cyan-500 hover:bg-cyan-500 hover:text-black transition">
+                    Backup & Export
+                </a>
+
+                <a href="/admin/settings"
+                    class="block px-5 py-4 rounded-2xl bg-cyan-500 text-black font-bold">
+                    Settings
+                </a>
+
+                <a href="/admin/logout"
+                    class="block px-5 py-4 rounded-2xl border border-red-500 text-red-400 hover:bg-red-500 hover:text-white transition">
+                    Logout
+                </a>
+
+            </div>
+
+        </aside>
+
+        <!-- MAIN -->
+
+        <main class="flex-1 p-6 md:p-10">
+
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+
+                <div>
+
+                    <h2 class="text-4xl font-bold text-cyan-400">
+                        Admin Settings
+                    </h2>
+
+                    <p class="text-gray-400 mt-3">
+                        Payment, QR, shop details aur important links manage karein.
+                    </p>
+
+                </div>
+
+                <a href="/admin/dashboard"
+                    class="px-6 py-3 bg-cyan-500 rounded-xl text-black font-bold text-center">
+                    Back Dashboard
+                </a>
+
+            </div>
+
+            <% if (success) { %>
+
+                <div class="mt-8 bg-green-500/10 border border-green-500 rounded-2xl p-5 text-green-400 font-bold">
+                    <%= success %>
+                </div>
+
+            <% } %>
+
+            <!-- BASIC SETTINGS -->
+
+            <div class="bg-[#0b1120] border border-cyan-500 rounded-3xl p-8 mt-10">
+
+                <h3 class="text-3xl font-bold text-cyan-400">
+                    Basic & Payment Settings
+                </h3>
+
+                <p class="text-gray-400 mt-3">
+                    Yahan se QR, UPI, payment number aur service price change hoga.
+                </p>
+
+                <form
+                    action="/admin/settings/basic"
+                    method="POST"
+                    enctype="multipart/form-data"
+                    class="mt-8">
+
+                    <div class="grid md:grid-cols-2 gap-6">
+
+                        <div>
+
+                            <label class="block mb-2 text-gray-300">
+                                Shop Name
+                            </label>
+
+                            <input
+                                type="text"
+                                name="shopName"
+                                value="<%= settings.shopName || '' %>"
+                                required
+                                class="w-full px-5 py-4 rounded-2xl bg-black border border-cyan-400 outline-none">
+
+                        </div>
+
+                        <div>
+
+                            <label class="block mb-2 text-gray-300">
+                                WhatsApp Number
+                            </label>
+
+                            <input
+                                type="text"
+                                name="whatsappNumber"
+                                value="<%= settings.whatsappNumber || '' %>"
+                                class="w-full px-5 py-4 rounded-2xl bg-black border border-cyan-400 outline-none">
+
+                        </div>
+
+                        <div>
+
+                            <label class="block mb-2 text-gray-300">
+                                Payment Number
+                            </label>
+
+                            <input
+                                type="text"
+                                name="paymentNumber"
+                                value="<%= settings.paymentNumber || '' %>"
+                                class="w-full px-5 py-4 rounded-2xl bg-black border border-cyan-400 outline-none">
+
+                        </div>
+
+                        <div>
+
+                            <label class="block mb-2 text-gray-300">
+                                UPI ID
+                            </label>
+
+                            <input
+                                type="text"
+                                name="upiId"
+                                value="<%= settings.upiId || '' %>"
+                                class="w-full px-5 py-4 rounded-2xl bg-black border border-cyan-400 outline-none">
+
+                        </div>
+
+                        <div class="md:col-span-2">
+
+                            <label class="block mb-2 text-gray-300">
+                                Shop Address
+                            </label>
+
+                            <input
+                                type="text"
+                                name="shopAddress"
+                                value="<%= settings.shopAddress || '' %>"
+                                class="w-full px-5 py-4 rounded-2xl bg-black border border-cyan-400 outline-none">
+
+                        </div>
+
+                        <div class="md:col-span-2">
+
+                            <label class="block mb-2 text-gray-300">
+                                Notice Text
+                            </label>
+
+                            <textarea
+                                name="noticeText"
+                                rows="4"
+                                class="w-full px-5 py-4 rounded-2xl bg-black border border-cyan-400 outline-none"><%= settings.noticeText || '' %></textarea>
+
+                        </div>
+
+                        <div>
+
+                            <label class="block mb-2 text-gray-300">
+                                Aadhar Update Price
+                            </label>
+
+                            <input
+                                type="number"
+                                name="aadharUpdate"
+                                value="<%= settings.prices && settings.prices.aadharUpdate ? settings.prices.aadharUpdate : 300 %>"
+                                required
+                                class="w-full px-5 py-4 rounded-2xl bg-black border border-cyan-400 outline-none">
+
+                        </div>
+
+                        <div>
+
+                            <label class="block mb-2 text-gray-300">
+                                New PAN Price
+                            </label>
+
+                            <input
+                                type="number"
+                                name="newPan"
+                                value="<%= settings.prices && settings.prices.newPan ? settings.prices.newPan : 200 %>"
+                                required
+                                class="w-full px-5 py-4 rounded-2xl bg-black border border-cyan-400 outline-none">
+
+                        </div>
+
+                        <div>
+
+                            <label class="block mb-2 text-gray-300">
+                                PAN Correction Price
+                            </label>
+
+                            <input
+                                type="number"
+                                name="panCorrection"
+                                value="<%= settings.prices && settings.prices.panCorrection ? settings.prices.panCorrection : 200 %>"
+                                required
+                                class="w-full px-5 py-4 rounded-2xl bg-black border border-cyan-400 outline-none">
+
+                        </div>
+
+                        <div>
+
+                            <label class="block mb-2 text-gray-300">
+                                QR Image Upload
+                            </label>
+
+                            <input
+                                type="file"
+                                name="qrImage"
+                                accept=".jpg,.jpeg,.png"
+                                class="w-full bg-black border border-cyan-400 rounded-2xl p-4">
+
+                        </div>
+
+                    </div>
+
+                    <% if (settings.qrImage) { %>
+
+                        <div class="mt-8">
+
+                            <p class="text-gray-400 mb-3">
+                                Current QR Image
+                            </p>
+
+                            <img
+                                src="<%= settings.qrImage %>"
+                                class="w-48 h-48 object-cover rounded-2xl border border-cyan-500">
+
+                        </div>
+
+                    <% } %>
+
+                    <button
+                        type="submit"
+                        class="mt-8 w-full py-4 bg-cyan-500 rounded-2xl text-black font-bold hover:bg-cyan-600 transition">
+
+                        Save Settings
+
+                    </button>
+
+                </form>
+
+            </div>
+
+            <!-- IMPORTANT LINKS -->
+
+            <div class="bg-[#0b1120] border border-cyan-500 rounded-3xl p-8 mt-10">
+
+                <h3 class="text-3xl font-bold text-cyan-400">
+                    Important Links
+                </h3>
+
+                <p class="text-gray-400 mt-3">
+                    Exam admit card, result, sarkari portal links yahan add karein.
+                </p>
+
+                <form
+                    action="/admin/settings/add-link"
+                    method="POST"
+                    class="grid md:grid-cols-4 gap-5 mt-8">
+
+                    <input
+                        type="text"
+                        name="title"
+                        required
+                        placeholder="Link Title"
+                        class="px-5 py-4 rounded-2xl bg-black border border-cyan-400 outline-none">
+
+                    <input
+                        type="url"
+                        name="url"
+                        required
+                        placeholder="https://example.com"
+                        class="px-5 py-4 rounded-2xl bg-black border border-cyan-400 outline-none">
+
+                    <input
+                        type="text"
+                        name="category"
+                        placeholder="Admit Card / Result"
+                        class="px-5 py-4 rounded-2xl bg-black border border-cyan-400 outline-none">
+
+                    <button
+                        type="submit"
+                        class="py-4 bg-green-500 rounded-2xl text-black font-bold hover:bg-green-600 transition">
+
+                        Add Link
+
+                    </button>
+
+                </form>
+
+                <div class="mt-8 overflow-x-auto">
+
+                    <table class="w-full text-left">
+
+                        <thead class="bg-black text-cyan-400">
+
+                            <tr>
+                                <th class="p-5">No.</th>
+                                <th class="p-5">Title</th>
+                                <th class="p-5">Category</th>
+                                <th class="p-5">URL</th>
+                                <th class="p-5">Action</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <% if (!settings.importantLinks || settings.importantLinks.length === 0) { %>
+
+                                <tr class="border-t border-gray-700">
+
+                                    <td colspan="5" class="p-8 text-center text-gray-400">
+                                        Abhi koi important link add nahi hua.
+                                    </td>
+
+                                </tr>
+
+                            <% } %>
+
+                            <% if (settings.importantLinks) { %>
+
+                                <% settings.importantLinks.forEach((link, index) => { %>
+
+                                    <tr class="border-t border-gray-700">
+
+                                        <td class="p-5 text-cyan-400 font-bold">
+                                            <%= index + 1 %>
+                                        </td>
+
+                                        <td class="p-5">
+                                            <%= link.title %>
+                                        </td>
+
+                                        <td class="p-5">
+                                            <%= link.category || "General" %>
+                                        </td>
+
+                                        <td class="p-5">
+
+                                            <a href="<%= link.url %>"
+                                                target="_blank"
+                                                class="text-cyan-400 underline">
+
+                                                Open Link
+
+                                            </a>
+
+                                        </td>
+
+                                        <td class="p-5">
+
+                                            <form
+                                                action="/admin/settings/delete-link/<%= index %>"
+                                                method="POST">
+
+                                                <button
+                                                    type="submit"
+                                                    class="px-5 py-3 bg-red-500 rounded-xl text-white font-bold hover:bg-red-600 transition">
+
+                                                    Delete
+
+                                                </button>
+
+                                            </form>
+
+                                        </td>
+
+                                    </tr>
+
+                                <% }) %>
+
+                            <% } %>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+</html>

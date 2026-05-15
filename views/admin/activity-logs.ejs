@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Activity Logs</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#050816] text-white">
+
+    <div class="max-w-7xl mx-auto p-6">
+
+        <div class="flex items-center justify-between">
+
+            <div>
+
+                <h1 class="text-4xl font-bold text-cyan-400">
+                    Activity Logs
+                </h1>
+
+                <p class="text-gray-400 mt-3">
+                    Admin and staff activities
+                </p>
+
+            </div>
+
+            <a href="/admin/dashboard"
+                class="px-6 py-3 bg-cyan-500 rounded-2xl text-black font-bold">
+
+                Dashboard
+
+            </a>
+
+        </div>
+
+        <div class="bg-[#0b1120] border border-cyan-500 rounded-3xl mt-10 overflow-hidden">
+
+            <div class="overflow-x-auto">
+
+                <table class="w-full">
+
+                    <thead class="bg-black text-cyan-400">
+
+                        <tr>
+
+                            <th class="p-5 text-left">
+                                Admin
+                            </th>
+
+                            <th class="p-5 text-left">
+                                Action
+                            </th>
+
+                            <th class="p-5 text-left">
+                                Time
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <% if (logs.length === 0) { %>
+
+                            <tr class="border-t border-gray-800">
+
+                                <td colspan="3"
+                                    class="p-8 text-center text-gray-400">
+
+                                    No activity found
+
+                                </td>
+
+                            </tr>
+
+                        <% } %>
+
+                        <% logs.forEach((log) => { %>
+
+                            <tr class="border-t border-gray-800">
+
+                                <td class="p-5 font-bold text-cyan-400">
+                                    <%= log.admin %>
+                                </td>
+
+                                <td class="p-5">
+                                    <%= log.action %>
+                                </td>
+
+                                <td class="p-5 text-gray-400">
+                                    <%= log.time %>
+                                </td>
+
+                            </tr>
+
+                        <% }) %>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

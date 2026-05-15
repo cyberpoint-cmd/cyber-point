@@ -1,0 +1,21 @@
+{
+    "shopName": "CYBER-POINT",
+    "shopAddress": "CyberPoint Digital Seva",
+    "whatsappNumber": "7870221293",
+    "paymentNumber": "7250943851",
+    "upiId": "abukaish45@okicici",
+    "qrImage": "/uploads/1778664996399-GooglePay_QR (1).png",
+    "noticeText": "Fast & Secure Digital Services",
+    "prices": {
+        "aadharUpdate": 300,
+        "newPan": 200,
+        "panCorrection": 200
+    },
+    "importantLinks": [
+        {
+            "title": "aadhar site",
+            "url": "https://myaadhaar.uidai.gov.in/en_IN",
+            "category": "fd"
+        }
+    ]
+}
