@@ -70,6 +70,19 @@ router.get("/", (req, res) => {
 
 });
 
+/* SERVICES PAGE */
+
+router.get("/services", (req, res) => {
+
+    const settings =
+        readSettings();
+
+    res.render("services", {
+        settings
+    });
+
+});
+
 /* STATUS CHECK PAGE */
 
 router.get("/status-check", (req, res) => {
