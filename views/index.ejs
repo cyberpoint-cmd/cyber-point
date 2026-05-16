@@ -53,7 +53,6 @@
         rel="stylesheet">
 
     <style>
-
         * {
             font-family: 'Poppins', sans-serif;
         }
@@ -63,86 +62,80 @@
         }
 
         body {
-            background: #eef4ff;
+            background: #020617;
             overflow-x: hidden;
+            color: white;
         }
 
         .top-gradient {
-            background: linear-gradient(90deg, #061a73, #0077ff, #00c6ff);
+            background: linear-gradient(90deg, #020617, #0f172a, #111827, #0f172a);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
         .hero-gradient {
             background:
-                radial-gradient(circle at 12% 18%, rgba(0,198,255,0.35), transparent 28%),
-                radial-gradient(circle at 88% 18%, rgba(59,130,246,0.35), transparent 28%),
-                linear-gradient(rgba(2,6,23,0.78), rgba(2,6,23,0.80)),
+                radial-gradient(circle at top left, rgba(6,182,212,0.28), transparent 30%),
+                radial-gradient(circle at top right, rgba(59,130,246,0.25), transparent 30%),
+                radial-gradient(circle at bottom, rgba(168,85,247,0.18), transparent 35%),
+                linear-gradient(rgba(2,6,23,0.88), rgba(2,6,23,0.92)),
                 url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1600&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
         }
 
         .glass {
-            background: rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.08);
             backdrop-filter: blur(18px);
-            border: 1px solid rgba(255,255,255,0.22);
+            border: 1px solid rgba(255,255,255,0.12);
         }
 
-        .white-glass {
-            background: rgba(255,255,255,0.92);
+        .dark-card {
+            background: rgba(15,23,42,0.88);
             backdrop-filter: blur(18px);
-            border: 1px solid rgba(14,165,233,0.18);
-        }
-
-        .service-card {
-            transition: 0.35s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px) scale(1.015);
-            box-shadow: 0 25px 60px rgba(2, 43, 120, 0.18);
-        }
-
-        .glow-btn {
-            box-shadow: 0 0 30px rgba(34,211,238,0.45);
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 25px 70px rgba(0,0,0,0.35);
         }
 
         .main-btn {
-            transition: 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            transition: 0.35s ease;
         }
 
         .main-btn:hover {
-            transform: scale(1.05);
+            transform: translateY(-4px) scale(1.03);
         }
 
-        .shine {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .shine::after {
+        .main-btn::after {
             content: "";
             position: absolute;
             top: 0;
             left: -120%;
             width: 70%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
             transform: skewX(-20deg);
             animation: shineMove 4s infinite;
         }
 
         @keyframes shineMove {
-            0% {
-                left: -120%;
-            }
+            0% { left: -120%; }
+            50% { left: 140%; }
+            100% { left: 140%; }
+        }
 
-            45% {
-                left: 140%;
-            }
+        .service-card {
+            transition: 0.35s ease;
+            background: rgba(15,23,42,0.92);
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+        }
 
-            100% {
-                left: 140%;
-            }
+        .service-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow:
+                0 25px 70px rgba(6,182,212,0.18),
+                0 10px 40px rgba(59,130,246,0.18);
         }
 
         .float-card {
@@ -150,27 +143,34 @@
         }
 
         @keyframes floatCard {
-            0%, 100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-14px);
-            }
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-14px); }
         }
 
-        @media (max-width: 768px) {
+        .premium-heading {
+            background: linear-gradient(90deg, #ffffff, #67e8f9, #a5f3fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #06b6d4;
+            border-radius: 20px;
+        }
+
+        @media(max-width:768px) {
             .hero-gradient {
                 min-height: auto;
             }
 
             .mobile-card {
-                border-radius: 28px;
+                border-radius: 30px;
             }
-
         }
-
     </style>
 
 </head>
@@ -179,23 +179,23 @@
 
     <!-- TOP BAR -->
 
-    <div class="bg-white border-b border-blue-100 shadow-sm">
+    <div class="bg-[#020617] border-b border-cyan-500/20 shadow-xl">
 
         <div class="max-w-7xl mx-auto px-4 sm:px-5 py-4 flex items-center justify-between gap-4">
 
             <div class="flex items-center gap-3 min-w-0">
 
-                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-blue-900 to-cyan-500 text-white flex items-center justify-center text-xl sm:text-2xl font-black flex-shrink-0 shadow-lg">
+                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-cyan-400 to-blue-700 text-black flex items-center justify-center text-xl sm:text-2xl font-black flex-shrink-0 shadow-lg">
                     CP
                 </div>
 
                 <div class="min-w-0">
 
-                    <h2 class="text-xl sm:text-2xl md:text-4xl font-black text-blue-950 truncate">
+                    <h2 class="text-xl sm:text-2xl md:text-4xl font-black text-cyan-300 truncate">
                         <%= settings && settings.shopName ? settings.shopName : "CyberPoint" %>
                     </h2>
 
-                    <p class="text-gray-500 text-xs sm:text-sm truncate">
+                    <p class="text-gray-400 text-xs sm:text-sm truncate">
                         Premium Digital Service Portal
                     </p>
 
@@ -206,14 +206,14 @@
             <div class="hidden md:flex items-center gap-5">
 
                 <a href="/status-check"
-                    class="px-6 py-3 rounded-2xl border-2 border-blue-600 text-blue-700 font-bold hover:bg-blue-600 hover:text-white transition main-btn">
+                    class="px-6 py-3 rounded-2xl border-2 border-cyan-400 text-cyan-300 font-bold hover:bg-cyan-400 hover:text-black transition main-btn">
 
                     Status Check
 
                 </a>
 
                 <a href="/admin/login"
-                    class="px-6 py-3 rounded-2xl bg-blue-700 text-white font-black hover:bg-black transition main-btn">
+                    class="px-6 py-3 rounded-2xl bg-cyan-400 text-black font-black hover:bg-white transition main-btn">
 
                     Admin Login
 
@@ -222,7 +222,7 @@
             </div>
 
             <a href="/status-check"
-                class="md:hidden px-4 py-3 rounded-xl bg-blue-700 text-white text-sm font-black flex-shrink-0">
+                class="md:hidden px-4 py-3 rounded-xl bg-cyan-400 text-black text-sm font-black flex-shrink-0">
 
                 Status
 
@@ -241,21 +241,21 @@
             <div class="flex gap-3 sm:gap-6 text-white font-semibold text-sm sm:text-lg whitespace-nowrap">
 
                 <a href="#services"
-                    class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/25 transition">
+                    class="px-4 py-2 rounded-xl bg-white/10 hover:bg-cyan-400 hover:text-black transition">
 
                     Services
 
                 </a>
 
                 <a href="#links"
-                    class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/25 transition">
+                    class="px-4 py-2 rounded-xl bg-white/10 hover:bg-cyan-400 hover:text-black transition">
 
                     Important Links
 
                 </a>
 
                 <a href="#contact"
-                    class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/25 transition">
+                    class="px-4 py-2 rounded-xl bg-white/10 hover:bg-cyan-400 hover:text-black transition">
 
                     Contact
 
@@ -302,7 +302,7 @@
                 <h1 class="text-4xl sm:text-5xl md:text-7xl font-black text-white leading-tight">
 
                     Fast, Secure &
-                    <span class="text-cyan-300 block">
+                    <span class="premium-heading block">
                         Premium
                     </span>
 
@@ -319,7 +319,7 @@
                 <div class="grid sm:flex gap-4 sm:gap-5 mt-8 sm:mt-10">
 
                     <a href="#services"
-                        class="shine main-btn text-center px-8 sm:px-10 py-4 sm:py-5 rounded-2xl bg-cyan-300 text-black font-black text-base sm:text-lg glow-btn">
+                        class="shine main-btn text-center px-8 sm:px-10 py-4 sm:py-5 rounded-2xl bg-cyan-300 text-black font-black text-base sm:text-lg shadow-[0_0_35px_rgba(34,211,238,0.35)]">
 
                         Explore Services
 
@@ -358,38 +358,38 @@
 
             <!-- RIGHT -->
 
-            <div class="white-glass rounded-[28px] sm:rounded-[35px] shadow-2xl p-6 sm:p-10 mobile-card float-card">
+            <div class="dark-card rounded-[28px] sm:rounded-[35px] p-6 sm:p-10 mobile-card float-card">
 
-                <h2 class="text-3xl sm:text-4xl font-black text-blue-950 text-center">
+                <h2 class="text-3xl sm:text-4xl font-black text-cyan-300 text-center">
                     Apply Online
                 </h2>
 
-                <p class="text-center text-gray-500 mt-3">
+                <p class="text-center text-gray-400 mt-3">
                     Select service and continue
                 </p>
 
-                <div class="w-32 h-32 sm:w-44 sm:h-44 rounded-full bg-gradient-to-br from-blue-100 to-cyan-100 mx-auto mt-6 sm:mt-8 flex items-center justify-center text-5xl sm:text-7xl shadow-inner">
+                <div class="w-32 h-32 sm:w-44 sm:h-44 rounded-full bg-gradient-to-br from-cyan-300 to-blue-700 mx-auto mt-6 sm:mt-8 flex items-center justify-center text-5xl sm:text-7xl shadow-inner">
                     🔐
                 </div>
 
                 <div class="mt-8 sm:mt-10 space-y-4 sm:space-y-5">
 
                     <a href="/aadhar-update"
-                        class="block w-full text-center py-4 sm:py-5 rounded-2xl bg-blue-700 text-white text-lg sm:text-xl font-black hover:bg-black transition main-btn">
+                        class="block w-full text-center py-4 sm:py-5 rounded-2xl bg-blue-600 text-white text-lg sm:text-xl font-black hover:bg-cyan-300 hover:text-black transition main-btn">
 
                         🪪 Aadhar Update
 
                     </a>
 
                     <a href="/new-pan"
-                        class="block w-full text-center py-4 sm:py-5 rounded-2xl bg-cyan-500 text-black text-lg sm:text-xl font-black hover:bg-black hover:text-white transition main-btn">
+                        class="block w-full text-center py-4 sm:py-5 rounded-2xl bg-cyan-400 text-black text-lg sm:text-xl font-black hover:bg-white transition main-btn">
 
                         💳 New PAN Card
 
                     </a>
 
                     <a href="/pan-correction"
-                        class="block w-full text-center py-4 sm:py-5 rounded-2xl bg-green-500 text-black text-lg sm:text-xl font-black hover:bg-black hover:text-white transition main-btn">
+                        class="block w-full text-center py-4 sm:py-5 rounded-2xl bg-green-500 text-black text-lg sm:text-xl font-black hover:bg-white transition main-btn">
 
                         📄 PAN Correction
 
@@ -405,23 +405,23 @@
 
     <!-- SERVICES -->
 
-    <section id="services" class="py-16 sm:py-24 bg-gradient-to-b from-[#eef4ff] to-white">
+    <section id="services" class="py-16 sm:py-24 bg-gradient-to-b from-[#020617] to-[#0f172a]">
 
         <div class="max-w-7xl mx-auto px-4 sm:px-5">
 
             <div class="text-center mb-12 sm:mb-20">
 
-                <div class="inline-block px-5 py-2 rounded-full bg-blue-100 text-blue-700 font-black mb-5">
+                <div class="inline-block px-5 py-2 rounded-full bg-cyan-400/10 text-cyan-300 font-black mb-5 border border-cyan-400/20">
                     Our Services
                 </div>
 
-                <h2 class="text-4xl sm:text-5xl md:text-6xl font-black text-blue-950">
+                <h2 class="text-4xl sm:text-5xl md:text-6xl font-black text-white">
 
                     Premium Services
 
                 </h2>
 
-                <p class="text-gray-500 text-base sm:text-xl mt-4 sm:mt-6">
+                <p class="text-gray-400 text-base sm:text-xl mt-4 sm:mt-6">
                     Select your service and apply online instantly.
                 </p>
 
@@ -429,22 +429,22 @@
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10">
 
-                <div class="service-card bg-white rounded-[28px] sm:rounded-[35px] p-6 sm:p-10 border border-blue-100 shadow-lg">
+                <div class="service-card rounded-[28px] sm:rounded-[35px] p-6 sm:p-10">
 
-                    <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-cyan-100 flex items-center justify-center text-4xl sm:text-5xl">
+                    <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-cyan-400/15 flex items-center justify-center text-4xl sm:text-5xl border border-cyan-400/20">
                         🪪
                     </div>
 
-                    <h3 class="text-2xl sm:text-3xl font-black text-blue-950 mt-6 sm:mt-8">
+                    <h3 class="text-2xl sm:text-3xl font-black text-cyan-300 mt-6 sm:mt-8">
                         Aadhar Update
                     </h3>
 
-                    <p class="text-gray-500 mt-4 sm:mt-5 leading-7 sm:leading-8">
+                    <p class="text-gray-400 mt-4 sm:mt-5 leading-7 sm:leading-8">
                         Mobile number update, address correction and OTP support.
                     </p>
 
                     <a href="/aadhar-update"
-                        class="block text-center mt-6 sm:mt-8 py-4 sm:py-5 rounded-2xl bg-cyan-500 text-black font-black text-base sm:text-lg hover:bg-black hover:text-white transition main-btn">
+                        class="block text-center mt-6 sm:mt-8 py-4 sm:py-5 rounded-2xl bg-cyan-400 text-black font-black text-base sm:text-lg hover:bg-white transition main-btn">
 
                         Apply Now
 
@@ -452,22 +452,22 @@
 
                 </div>
 
-                <div class="service-card bg-white rounded-[28px] sm:rounded-[35px] p-6 sm:p-10 border border-blue-100 shadow-lg">
+                <div class="service-card rounded-[28px] sm:rounded-[35px] p-6 sm:p-10">
 
-                    <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-purple-100 flex items-center justify-center text-4xl sm:text-5xl">
+                    <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-purple-400/15 flex items-center justify-center text-4xl sm:text-5xl border border-purple-400/20">
                         💳
                     </div>
 
-                    <h3 class="text-2xl sm:text-3xl font-black text-blue-950 mt-6 sm:mt-8">
+                    <h3 class="text-2xl sm:text-3xl font-black text-purple-300 mt-6 sm:mt-8">
                         New PAN Card
                     </h3>
 
-                    <p class="text-gray-500 mt-4 sm:mt-5 leading-7 sm:leading-8">
+                    <p class="text-gray-400 mt-4 sm:mt-5 leading-7 sm:leading-8">
                         Instant PAN application with secure upload system.
                     </p>
 
                     <a href="/new-pan"
-                        class="block text-center mt-6 sm:mt-8 py-4 sm:py-5 rounded-2xl bg-purple-500 text-white font-black text-base sm:text-lg hover:bg-black transition main-btn">
+                        class="block text-center mt-6 sm:mt-8 py-4 sm:py-5 rounded-2xl bg-purple-500 text-white font-black text-base sm:text-lg hover:bg-white hover:text-black transition main-btn">
 
                         Apply Now
 
@@ -475,22 +475,22 @@
 
                 </div>
 
-                <div class="service-card bg-white rounded-[28px] sm:rounded-[35px] p-6 sm:p-10 border border-blue-100 shadow-lg md:col-span-2 lg:col-span-1">
+                <div class="service-card rounded-[28px] sm:rounded-[35px] p-6 sm:p-10 md:col-span-2 lg:col-span-1">
 
-                    <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-green-100 flex items-center justify-center text-4xl sm:text-5xl">
+                    <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-green-400/15 flex items-center justify-center text-4xl sm:text-5xl border border-green-400/20">
                         📄
                     </div>
 
-                    <h3 class="text-2xl sm:text-3xl font-black text-blue-950 mt-6 sm:mt-8">
+                    <h3 class="text-2xl sm:text-3xl font-black text-green-300 mt-6 sm:mt-8">
                         PAN Correction
                     </h3>
 
-                    <p class="text-gray-500 mt-4 sm:mt-5 leading-7 sm:leading-8">
+                    <p class="text-gray-400 mt-4 sm:mt-5 leading-7 sm:leading-8">
                         Name, DOB, address and correction services.
                     </p>
 
                     <a href="/pan-correction"
-                        class="block text-center mt-6 sm:mt-8 py-4 sm:py-5 rounded-2xl bg-green-500 text-black font-black text-base sm:text-lg hover:bg-black hover:text-white transition main-btn">
+                        class="block text-center mt-6 sm:mt-8 py-4 sm:py-5 rounded-2xl bg-green-500 text-black font-black text-base sm:text-lg hover:bg-white transition main-btn">
 
                         Apply Now
 
@@ -506,17 +506,17 @@
 
     <!-- IMPORTANT LINKS -->
 
-    <section id="links" class="py-16 sm:py-24 bg-white">
+    <section id="links" class="py-16 sm:py-24 bg-[#020617]">
 
         <div class="max-w-7xl mx-auto px-4 sm:px-5">
 
             <div class="text-center mb-12 sm:mb-20">
 
-                <div class="inline-block px-5 py-2 rounded-full bg-cyan-100 text-blue-700 font-black mb-5">
+                <div class="inline-block px-5 py-2 rounded-full bg-cyan-400/10 text-cyan-300 font-black mb-5 border border-cyan-400/20">
                     Useful Links
                 </div>
 
-                <h2 class="text-4xl sm:text-5xl md:text-6xl font-black text-blue-950">
+                <h2 class="text-4xl sm:text-5xl md:text-6xl font-black text-white">
 
                     Important Websites
 
@@ -532,17 +532,17 @@
 
                         <a href="<%= link.url %>"
                             target="_blank"
-                            class="service-card bg-[#f7fbff] border border-blue-100 rounded-[28px] sm:rounded-[30px] p-6 sm:p-8 text-center shadow-md">
+                            class="service-card rounded-[28px] sm:rounded-[30px] p-6 sm:p-8 text-center">
 
                             <div class="text-5xl sm:text-6xl">
                                 🌐
                             </div>
 
-                            <h3 class="text-xl sm:text-2xl font-black text-blue-950 mt-5 sm:mt-6">
+                            <h3 class="text-xl sm:text-2xl font-black text-cyan-300 mt-5 sm:mt-6">
                                 <%= link.title %>
                             </h3>
 
-                            <p class="text-gray-500 mt-3">
+                            <p class="text-gray-400 mt-3">
                                 <%= link.category || "General" %>
                             </p>
 
@@ -552,13 +552,13 @@
 
                 <% } else { %>
 
-                    <div class="bg-[#f7fbff] border border-blue-100 rounded-[28px] p-8 text-center sm:col-span-2 lg:col-span-4">
+                    <div class="service-card rounded-[28px] p-8 text-center sm:col-span-2 lg:col-span-4">
 
                         <div class="text-6xl">
                             🔗
                         </div>
 
-                        <h3 class="text-2xl font-black text-blue-950 mt-5">
+                        <h3 class="text-2xl font-black text-cyan-300 mt-5">
                             Important links will be updated soon.
                         </h3>
 
@@ -574,23 +574,23 @@
 
     <!-- CONTACT -->
 
-    <section id="contact" class="py-16 sm:py-24 bg-gradient-to-r from-blue-950 via-blue-800 to-cyan-700">
+    <section id="contact" class="py-16 sm:py-24 bg-gradient-to-r from-[#020617] via-blue-950 to-cyan-950">
 
         <div class="max-w-5xl mx-auto px-4 sm:px-5">
 
-            <div class="bg-white rounded-[28px] sm:rounded-[40px] p-6 sm:p-12 text-center shadow-2xl">
+            <div class="dark-card rounded-[28px] sm:rounded-[40px] p-6 sm:p-12 text-center shadow-2xl">
 
-                <div class="inline-block px-5 py-2 rounded-full bg-blue-100 text-blue-700 font-black mb-5">
+                <div class="inline-block px-5 py-2 rounded-full bg-cyan-400/10 text-cyan-300 font-black mb-5 border border-cyan-400/20">
                     Need Help?
                 </div>
 
-                <h2 class="text-4xl sm:text-5xl font-black text-blue-950">
+                <h2 class="text-4xl sm:text-5xl font-black text-white">
 
                     Contact Us
 
                 </h2>
 
-                <p class="text-gray-600 text-base sm:text-xl mt-6 sm:mt-8 leading-8 sm:leading-9 break-words">
+                <p class="text-gray-300 text-base sm:text-xl mt-6 sm:mt-8 leading-8 sm:leading-9 break-words">
 
                     <%= settings && settings.shopAddress ? settings.shopAddress : "Digital Service Center" %>
 
@@ -600,14 +600,14 @@
 
                     <a href="https://wa.me/<%= settings && settings.whatsappNumber ? settings.whatsappNumber : '' %>"
                         target="_blank"
-                        class="text-center px-8 sm:px-10 py-4 sm:py-5 rounded-2xl bg-green-500 text-black font-black text-base sm:text-lg hover:bg-black hover:text-white transition main-btn">
+                        class="text-center px-8 sm:px-10 py-4 sm:py-5 rounded-2xl bg-green-500 text-black font-black text-base sm:text-lg hover:bg-white transition main-btn">
 
                         WhatsApp Now
 
                     </a>
 
                     <a href="/status-check"
-                        class="text-center px-8 sm:px-10 py-4 sm:py-5 rounded-2xl bg-blue-700 text-white font-black text-base sm:text-lg hover:bg-black transition main-btn">
+                        class="text-center px-8 sm:px-10 py-4 sm:py-5 rounded-2xl bg-cyan-400 text-black font-black text-base sm:text-lg hover:bg-white transition main-btn">
 
                         Check Status
 
@@ -623,26 +623,26 @@
 
     <!-- MOBILE BOTTOM BAR -->
 
-    <div class="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-blue-100 shadow-2xl md:hidden">
+    <div class="fixed bottom-0 left-0 right-0 z-50 bg-[#020617] border-t border-cyan-500/20 shadow-2xl md:hidden">
 
         <div class="grid grid-cols-4 text-center text-xs font-black">
 
             <a href="/"
-                class="py-3 text-blue-900">
+                class="py-3 text-cyan-300">
 
                 🏠<br>Home
 
             </a>
 
             <a href="#services"
-                class="py-3 text-blue-900">
+                class="py-3 text-cyan-300">
 
                 🧾<br>Services
 
             </a>
 
             <a href="/status-check"
-                class="py-3 text-blue-900">
+                class="py-3 text-cyan-300">
 
                 🔎<br>Status
 
@@ -650,7 +650,7 @@
 
             <a href="https://wa.me/<%= settings && settings.whatsappNumber ? settings.whatsappNumber : '' %>"
                 target="_blank"
-                class="py-3 text-green-600">
+                class="py-3 text-green-400">
 
                 💬<br>Chat
 
@@ -662,7 +662,7 @@
 
     <!-- FOOTER -->
 
-    <footer class="bg-black py-10 mb-16 md:mb-0 text-center text-gray-400">
+    <footer class="bg-black py-10 mb-16 md:mb-0 text-center text-gray-400 border-t border-cyan-500/20">
 
         <h2 class="text-3xl font-black text-cyan-400">
 
