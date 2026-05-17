@@ -83,6 +83,19 @@ router.get("/services", (req, res) => {
 
 });
 
+/* CONTACT PAGE */
+
+router.get("/contact", (req, res) => {
+
+    const settings =
+        readSettings();
+
+    res.render("contact", {
+        settings
+    });
+
+});
+
 /* STATUS CHECK PAGE */
 
 router.get("/status-check", (req, res) => {

@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Contact - Cyber Point</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #eef6ff;
+            overflow-x: hidden;
+            color: #071738;
+        }
+
+        .page-shell {
+            max-width: 1500px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(15, 23, 42, 0.15);
+        }
+
+        .hero-bg {
+            background:
+                radial-gradient(circle at 82% 35%, rgba(6, 182, 212, 0.25), transparent 22%),
+                linear-gradient(120deg, #06175f 0%, #0b3f90 45%, #0891d8 100%);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: 0.25s ease;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 0;
+            height: 3px;
+            border-radius: 50px;
+            background: #06d4f8;
+            transition: 0.25s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .premium-card {
+            background: white;
+            border: 1px solid #e5edf7;
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+            transition: 0.3s ease;
+        }
+
+        .premium-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 28px 55px rgba(15, 23, 42, 0.16);
+        }
+
+        .gradient-btn {
+            background: linear-gradient(135deg, #06b6d4, #0d6dcc);
+            box-shadow: 0 15px 35px rgba(13, 109, 204, 0.28);
+            transition: 0.3s ease;
+        }
+
+        .gradient-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 45px rgba(13, 109, 204, 0.40);
+        }
+
+        .floating {
+            animation: floatSoft 4s ease-in-out infinite;
+        }
+
+        @keyframes floatSoft {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        .input-box {
+            border: 1px solid #d9e5f1;
+            transition: 0.25s ease;
+        }
+
+        .input-box:focus {
+            border-color: #0d6dcc;
+            box-shadow: 0 0 0 4px rgba(13, 109, 204, 0.15);
+            outline: none;
+        }
+
+        @media(max-width: 1024px) {
+
+            .page-shell {
+                margin: 0;
+                border-radius: 0;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="page-shell">
+
+        <!-- NAVBAR -->
+
+        <header class="bg-white px-5 md:px-16 py-6 flex items-center justify-between gap-5">
+
+            <a href="/"
+                class="flex items-center gap-2">
+
+                <h1 class="text-2xl md:text-3xl font-black text-[#09245f] tracking-wide">
+                    <%= settings && settings.shopName ? settings.shopName : "CYBER POINT" %>
+                </h1>
+
+                <span class="w-3 h-3 bg-cyan-400 rounded-full"></span>
+
+            </a>
+
+            <nav class="hidden lg:flex items-center gap-8 font-semibold text-gray-800">
+
+                <a href="/"
+                    class="nav-link">
+                    Home
+                </a>
+
+                <a href="/services"
+                    class="nav-link">
+                    Services
+                </a>
+
+                <a href="/status-check"
+                    class="nav-link">
+                    Status Check
+                </a>
+
+                <a href="/contact"
+                    class="nav-link active text-[#0d6dcc]">
+                    Contact
+                </a>
+
+                <a href="/admin/login"
+                    class="nav-link">
+                    Admin Login
+                </a>
+
+            </nav>
+
+            <a href="https://wa.me/<%= settings && settings.whatsappNumber ? settings.whatsappNumber : '' %>"
+                target="_blank"
+                class="hidden md:inline-flex px-6 py-3 rounded-xl bg-green-500 text-white font-bold hover:bg-green-600 transition">
+
+                WhatsApp/Call ☎
+
+            </a>
+
+            <a href="/"
+                class="lg:hidden px-4 py-3 rounded-xl bg-[#0d6dcc] text-white font-bold text-sm">
+
+                Home
+
+            </a>
+
+        </header>
+
+        <!-- HERO -->
+
+        <section class="hero-bg px-5 md:px-16 py-20 md:py-24 grid lg:grid-cols-2 gap-12 items-center">
+
+            <div>
+
+                <h2 class="text-4xl md:text-6xl font-black text-white leading-tight">
+                    Contact Our Support Team
+                </h2>
+
+                <p class="text-white/90 text-lg md:text-xl mt-6 leading-8">
+                    Aadhaar, PAN, Certificate, Ration Card और सभी ऑनलाइन सेवाओं के लिए हमसे संपर्क करें।
+                </p>
+
+                <div class="flex flex-wrap gap-4 mt-8">
+
+                    <a href="tel:<%= settings && settings.paymentNumber ? settings.paymentNumber : '' %>"
+                        class="gradient-btn px-9 py-4 rounded-xl text-white font-black text-lg">
+
+                        Call Now
+
+                    </a>
+
+                    <a href="https://wa.me/<%= settings && settings.whatsappNumber ? settings.whatsappNumber : '' %>"
+                        target="_blank"
+                        class="px-9 py-4 rounded-xl border-2 border-cyan-300 text-white font-black text-lg hover:bg-cyan-400 hover:text-[#06175f] transition">
+
+                        WhatsApp
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="hidden lg:flex justify-center">
+
+                <div class="floating relative">
+
+                    <div class="w-[420px] h-[320px] bg-cyan-400/20 rounded-full absolute blur-3xl"></div>
+
+                    <div class="bg-white/10 border border-white/20 backdrop-blur-xl rounded-[40px] p-8 relative">
+
+                        <div class="bg-white rounded-[30px] p-10 shadow-2xl">
+
+                            <div class="flex justify-center gap-5">
+
+                                <div class="w-20 h-20 rounded-2xl bg-cyan-100 flex items-center justify-center text-4xl">
+                                    📞
+                                </div>
+
+                                <div class="w-20 h-20 rounded-2xl bg-blue-100 flex items-center justify-center text-4xl">
+                                    💬
+                                </div>
+
+                                <div class="w-20 h-20 rounded-2xl bg-green-100 flex items-center justify-center text-4xl">
+                                    📍
+                                </div>
+
+                            </div>
+
+                            <div class="text-center mt-8">
+
+                                <div class="w-32 h-32 mx-auto rounded-full bg-cyan-100 flex items-center justify-center text-7xl">
+                                    👨‍💻
+                                </div>
+
+                                <h3 class="text-3xl font-black text-[#09245f] mt-6">
+                                    24×7 Help Desk
+                                </h3>
+
+                                <p class="text-gray-500 mt-3">
+                                    Fast Digital Service Support
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- MAIN -->
+
+        <section class="px-5 md:px-16 py-14">
+
+            <div class="grid lg:grid-cols-[1fr_420px] gap-10">
+
+                <!-- LEFT -->
+
+                <div class="space-y-8">
+
+                    <!-- CONTACT FORM -->
+
+                    <div class="premium-card rounded-3xl p-7 md:p-10">
+
+                        <h3 class="text-3xl font-black text-black">
+                            Send Message
+                        </h3>
+
+                        <p class="text-gray-500 mt-2">
+                            अपनी समस्या या सेवा की जानकारी भेजें
+                        </p>
+
+                        <form class="grid md:grid-cols-2 gap-5 mt-8">
+
+                            <input type="text"
+                                placeholder="Your Name"
+                                class="input-box rounded-xl px-5 py-4">
+
+                            <input type="text"
+                                placeholder="Mobile Number"
+                                class="input-box rounded-xl px-5 py-4">
+
+                            <input type="text"
+                                placeholder="Service Name"
+                                class="input-box rounded-xl px-5 py-4 md:col-span-2">
+
+                            <textarea rows="5"
+                                placeholder="Your Message"
+                                class="input-box rounded-xl px-5 py-4 md:col-span-2 resize-none"></textarea>
+
+                            <button type="button"
+                                class="gradient-btn md:col-span-2 text-white rounded-xl py-4 text-lg font-black">
+
+                                Send Message
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                    <!-- MAP -->
+
+                    <div class="premium-card rounded-3xl overflow-hidden">
+
+                        <div class="bg-[#dff5ff] h-[350px] flex items-center justify-center text-center">
+
+                            <div>
+
+                                <div class="text-8xl">
+                                    📍
+                                </div>
+
+                                <h3 class="text-3xl font-black mt-4">
+                                    Google Map Location
+                                </h3>
+
+                                <p class="text-gray-600 mt-2">
+                                    Shop / Office Location Area
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- RIGHT -->
+
+                <aside class="space-y-8">
+
+                    <!-- CONTACT CARD -->
+
+                    <div class="premium-card rounded-3xl p-7">
+
+                        <h3 class="text-3xl font-black">
+                            Contact Information
+                        </h3>
+
+                        <div class="space-y-5 mt-8">
+
+                            <div class="flex items-start gap-4">
+
+                                <div class="w-14 h-14 rounded-2xl bg-cyan-100 flex items-center justify-center text-3xl">
+                                    📞
+                                </div>
+
+                                <div>
+
+                                    <h4 class="font-black text-lg">
+                                        Call Number
+                                    </h4>
+
+                                    <p class="text-gray-600">
+                                        <%= settings && settings.paymentNumber ? settings.paymentNumber : "Not Added" %>
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="flex items-start gap-4">
+
+                                <div class="w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center text-3xl">
+                                    💬
+                                </div>
+
+                                <div>
+
+                                    <h4 class="font-black text-lg">
+                                        WhatsApp
+                                    </h4>
+
+                                    <p class="text-gray-600">
+                                        <%= settings && settings.whatsappNumber ? settings.whatsappNumber : "Not Added" %>
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="flex items-start gap-4">
+
+                                <div class="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center text-3xl">
+                                    📍
+                                </div>
+
+                                <div>
+
+                                    <h4 class="font-black text-lg">
+                                        Office Address
+                                    </h4>
+
+                                    <p class="text-gray-600 leading-7">
+                                        <%= settings && settings.shopAddress ? settings.shopAddress : "Cyber Point Digital Seva Kendra" %>
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- SUPPORT BOX -->
+
+                    <div class="premium-card rounded-3xl p-7 bg-gradient-to-br from-[#07175f] to-[#0d6dcc] text-white">
+
+                        <h3 class="text-3xl font-black">
+                            Need Instant Help?
+                        </h3>
+
+                        <p class="mt-4 text-white/80 leading-7">
+                            हमारी टीम Aadhaar, PAN और सभी ऑनलाइन सेवाओं के लिए आपकी सहायता करेगी।
+                        </p>
+
+                        <div class="grid grid-cols-2 gap-4 mt-8">
+
+                            <a href="tel:<%= settings && settings.paymentNumber ? settings.paymentNumber : '' %>"
+                                class="bg-white text-[#07175f] rounded-xl py-4 text-center font-black hover:bg-cyan-100 transition">
+
+                                Call
+
+                            </a>
+
+                            <a href="https://wa.me/<%= settings && settings.whatsappNumber ? settings.whatsappNumber : '' %>"
+                                target="_blank"
+                                class="bg-green-500 rounded-xl py-4 text-center font-black hover:bg-green-600 transition">
+
+                                WhatsApp
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <!-- FAQ -->
+
+                    <div class="premium-card rounded-3xl p-7">
+
+                        <h3 class="text-3xl font-black">
+                            FAQ
+                        </h3>
+
+                        <div class="space-y-5 mt-8">
+
+                            <div class="border-b pb-4">
+
+                                <h4 class="font-black text-lg">
+                                    PAN बनने में कितना समय लगता है?
+                                </h4>
+
+                                <p class="text-gray-600 mt-2">
+                                    सामान्यतः 5–15 दिन।
+                                </p>
+
+                            </div>
+
+                            <div class="border-b pb-4">
+
+                                <h4 class="font-black text-lg">
+                                    Aadhaar Update कैसे होता है?
+                                </h4>
+
+                                <p class="text-gray-600 mt-2">
+                                    OTP verification के माध्यम से।
+                                </p>
+
+                            </div>
+
+                            <div>
+
+                                <h4 class="font-black text-lg">
+                                    Status कैसे check करें?
+                                </h4>
+
+                                <p class="text-gray-600 mt-2">
+                                    Token Number डालकर।
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </section>
+
+        <!-- FOOTER -->
+
+        <footer class="px-5 md:px-16 py-7 border-t text-sm text-gray-600 flex flex-col md:flex-row items-center justify-between gap-3">
+
+            <p>
+                Copyright © Cyber Point
+            </p>
+
+            <p>
+                Owner: KAISH
+            </p>
+
+        </footer>
+
+    </div>
+
+    <!-- MOBILE BOTTOM BAR -->
+
+    <div class="fixed bottom-0 left-0 right-0 z-50 bg-white border-t shadow-2xl md:hidden">
+
+        <div class="grid grid-cols-4 text-center text-xs font-black">
+
+            <a href="/"
+                class="py-3 text-[#09245f]">
+                🏠<br>Home
+            </a>
+
+            <a href="/services"
+                class="py-3 text-[#09245f]">
+                🧾<br>Services
+            </a>
+
+            <a href="/status-check"
+                class="py-3 text-[#09245f]">
+                🔎<br>Status
+            </a>
+
+            <a href="/contact"
+                class="py-3 text-green-600">
+                💬<br>Contact
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
