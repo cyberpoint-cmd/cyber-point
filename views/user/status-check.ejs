@@ -1,190 +1,379 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
 
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <title>Status Check</title>
+    <title>Status Check - CyberPoint</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f3f8ff;
+            color: #071738;
+        }
+
+        .nav-bg {
+            background: linear-gradient(90deg, #06175f, #064a91, #06a7bf);
+        }
+
+        .nav-link {
+            position: relative;
+            color: white;
+            font-weight: 500;
+            transition: 0.25s ease;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -9px;
+            width: 0;
+            height: 3px;
+            background: #24d3ee;
+            border-radius: 30px;
+            transition: 0.25s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .hero-bg {
+            background:
+                radial-gradient(circle at 78% 40%, rgba(6, 182, 212, 0.18), transparent 22%),
+                linear-gradient(180deg, #ffffff 0%, #eef7ff 100%);
+        }
+
+        .soft-card {
+            background: #ffffff;
+            border: 1px solid #d8e2ef;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+        }
+
+        .gradient-btn {
+            background: linear-gradient(90deg, #07175f, #06a7bf);
+            box-shadow: 0 14px 28px rgba(6, 167, 191, 0.25);
+            transition: 0.25s ease;
+        }
+
+        .gradient-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(6, 167, 191, 0.35);
+        }
+
+        .status-pill {
+            border-radius: 999px;
+            padding: 7px 18px;
+            font-weight: 800;
+            display: inline-block;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .timeline-dot {
+            width: 26px;
+            height: 26px;
+            border-radius: 999px;
+            background: #07175f;
+            box-shadow: 0 0 0 6px rgba(7, 23, 95, 0.08);
+        }
+
+        .timeline-line {
+            height: 5px;
+            background: linear-gradient(90deg, #07175f, #06a7bf);
+            flex: 1;
+            border-radius: 50px;
+        }
+
+        .floating {
+            animation: floatSoft 4s ease-in-out infinite;
+        }
+
+        @keyframes floatSoft {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        @media(max-width: 768px) {
+            .timeline-line {
+                display: none;
+            }
+        }
+    </style>
 </head>
 
-<body class="bg-[#050816] text-white">
+<body>
 
-    <%- include("../partials/navbar") %>
+    <!-- TOP NAVBAR -->
 
-    <div class="min-h-screen py-10 px-4">
+    <header class="nav-bg shadow-xl">
 
-        <div class="max-w-4xl mx-auto">
+        <div class="max-w-7xl mx-auto px-5 md:px-8 py-5 flex items-center justify-between gap-5">
 
-            <div class="bg-[#0b1120] border border-cyan-500 rounded-3xl p-6 md:p-10">
+            <a href="/"
+                class="flex items-center gap-3">
 
-                <div class="text-center">
-
-                    <h1 class="text-4xl font-bold text-cyan-400">
-                        Application Status Check
-                    </h1>
-
-                    <p class="mt-4 text-gray-300">
-                        <%= settings.shopName || "CyberPoint" %>
-                    </p>
-
-                    <p class="mt-2 text-gray-400">
-                        Token Number enter karke status dekhiye
-                    </p>
-
+                <div class="w-12 h-12 rounded-full bg-cyan-400 flex items-center justify-center text-[#07175f] font-black text-2xl">
+                    CP
                 </div>
 
-                <!-- FORM -->
+                <h1 class="text-2xl md:text-3xl font-black text-white">
+                    <%= settings && settings.shopName ? settings.shopName : "CYBER POINT" %>
+                </h1>
 
-                <form action="/status-check" method="POST" class="mt-10">
+            </a>
 
-                    <div class="flex flex-col md:flex-row gap-4">
+            <nav class="hidden lg:flex items-center gap-10 text-xl">
 
-                        <input
-                            type="text"
+                <a href="/"
+                    class="nav-link">
+                    Home
+                </a>
+
+                <a href="/services"
+                    class="nav-link">
+                    Services
+                </a>
+
+                <a href="/status-check"
+                    class="nav-link active">
+                    Status Check
+                </a>
+
+                <a href="/#contact"
+                    class="nav-link">
+                    Contact
+                </a>
+
+                <a href="/admin/login"
+                    class="nav-link">
+                    Admin Login
+                </a>
+
+            </nav>
+
+            <a href="https://wa.me/<%= settings && settings.whatsappNumber ? settings.whatsappNumber : '' %>"
+                target="_blank"
+                class="hidden md:flex items-center gap-2 bg-white text-[#07175f] px-7 py-4 rounded-xl font-black text-lg shadow-lg hover:bg-cyan-100 transition">
+
+                📞 Call / WhatsApp
+
+            </a>
+
+            <a href="/"
+                class="lg:hidden bg-white text-[#07175f] px-4 py-3 rounded-xl font-black">
+
+                Home
+
+            </a>
+
+        </div>
+
+    </header>
+
+    <!-- HERO -->
+
+    <section class="hero-bg">
+
+        <div class="max-w-7xl mx-auto px-5 md:px-8 py-16 grid md:grid-cols-[1fr_280px] gap-8 items-center">
+
+            <div class="text-center md:text-left">
+
+                <h2 class="text-4xl md:text-6xl font-black text-[#07175f] leading-tight">
+                    Application Status Check करें
+                </h2>
+
+                <p class="text-xl md:text-2xl text-black mt-5">
+                    अपना Token Number / Application ID डालकर अपने काम की स्थिति देखें
+                </p>
+
+            </div>
+
+            <div class="hidden md:flex justify-center">
+
+                <div class="floating text-8xl">
+                    🔎📄✅
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- MAIN CONTENT -->
+
+    <main class="max-w-6xl mx-auto px-5 md:px-8 py-10">
+
+        <div class="grid lg:grid-cols-2 gap-12 items-start">
+
+            <!-- CHECK FORM CARD -->
+
+            <section>
+
+                <div class="soft-card rounded-2xl p-7 md:p-10">
+
+                    <h3 class="text-2xl font-black text-black">
+                        Token / Application ID
+                    </h3>
+
+                    <form action="/status-check"
+                        method="POST"
+                        class="mt-4">
+
+                        <input type="text"
                             name="tokenNumber"
-                            placeholder="Enter Token Number"
+                            placeholder="Example: cybercafe01"
                             required
-                            class="flex-1 px-5 py-4 rounded-2xl bg-black border border-cyan-400 outline-none">
+                            class="w-full border border-gray-300 rounded-xl px-5 py-4 text-xl outline-none focus:ring-2 focus:ring-cyan-400">
 
-                        <button
-                            type="submit"
-                            class="px-8 py-4 bg-cyan-500 rounded-2xl text-black font-bold hover:bg-cyan-600">
+                        <button type="submit"
+                            class="gradient-btn w-full mt-5 py-4 rounded-xl text-white font-black text-2xl">
 
                             Check Status
 
                         </button>
 
-                    </div>
+                    </form>
 
-                </form>
+                    <p class="text-center text-gray-600 mt-4 text-lg">
+                        Token नंबर आपको आवेदन के बाद मिला होगा
+                    </p>
 
-                <!-- RESULT -->
+                </div>
+
+            </section>
+
+            <!-- RESULT / PREVIEW CARD -->
+
+            <section>
+
+                <h3 class="text-2xl font-black text-black mb-4">
+                    Status Result Preview Card
+                </h3>
 
                 <% if (application) { %>
 
-                    <div class="mt-10 bg-black border border-cyan-500 rounded-3xl p-6">
+                    <div class="soft-card rounded-2xl p-6">
 
-                        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+                        <div class="grid md:grid-cols-[1fr_auto] gap-5">
 
-                            <div>
+                            <div class="space-y-3 text-xl">
 
-                                <h2 class="text-3xl font-bold text-cyan-400">
-                                    Application Found
-                                </h2>
-
-                                <p class="text-gray-400 mt-2">
-                                    Token: <%= application.tokenNumber %>
-                                </p>
-
-                            </div>
-
-                            <span class="px-5 py-3 rounded-2xl font-bold
-                                <%= application.status === 'Completed'
-                                    ? 'bg-green-500/20 text-green-400'
-                                    : application.status === 'Rejected'
-                                    ? 'bg-red-500/20 text-red-400'
-                                    : application.status === 'Processing'
-                                    ? 'bg-blue-500/20 text-blue-400'
-                                    : application.status === 'OTP Pending'
-                                    ? 'bg-purple-500/20 text-purple-400'
-                                    : 'bg-yellow-500/20 text-yellow-400' %>">
-
-                                <%= application.status %>
-
-                            </span>
-
-                        </div>
-
-                        <div class="grid md:grid-cols-2 gap-6 mt-8">
-
-                            <div class="bg-[#0b1120] border border-cyan-500 rounded-2xl p-5">
-
-                                <p class="text-gray-400">
-                                    Applicant Name
-                                </p>
-
-                                <h3 class="text-xl font-bold mt-2">
-                                    <%= application.applicantName || "-" %>
-                                </h3>
-
-                            </div>
-
-                            <div class="bg-[#0b1120] border border-cyan-500 rounded-2xl p-5">
-
-                                <p class="text-gray-400">
-                                    Mobile Number
-                                </p>
-
-                                <h3 class="text-xl font-bold mt-2">
-                                    <%= application.phoneNumber || "-" %>
-                                </h3>
-
-                            </div>
-
-                            <div class="bg-[#0b1120] border border-cyan-500 rounded-2xl p-5">
-
-                                <p class="text-gray-400">
-                                    Service
-                                </p>
-
-                                <h3 class="text-xl font-bold mt-2">
+                                <p>
+                                    <span class="font-bold">Service Name:</span>
                                     <%= application.serviceType || "-" %>
-                                </h3>
-
-                            </div>
-
-                            <div class="bg-[#0b1120] border border-cyan-500 rounded-2xl p-5">
-
-                                <p class="text-gray-400">
-                                    Amount
                                 </p>
 
-                                <h3 class="text-xl font-bold text-green-400 mt-2">
+                                <p>
+                                    <span class="font-bold">Applicant Name:</span>
+                                    <%= application.applicantName || "-" %>
+                                </p>
+
+                                <p>
+                                    <span class="font-bold">Token ID:</span>
+                                    <%= application.tokenNumber || "-" %>
+                                </p>
+
+                                <p>
+                                    <span class="font-bold">Status:</span>
+                                    <span class="text-[#0d6dcc] font-bold">
+                                        <%= application.status || "-" %>
+                                    </span>
+                                </p>
+
+                                <p>
+                                    <span class="font-bold">Payment:</span>
+                                    <span class="<%= application.utrNumber ? 'text-green-600' : 'text-red-600' %> font-bold">
+                                        <%= application.utrNumber ? 'Received' : 'Not Uploaded Yet' %>
+                                    </span>
+                                </p>
+
+                                <p>
+                                    <span class="font-bold">Amount:</span>
                                     ₹<%= application.amount || 0 %>
-                                </h3>
-
-                            </div>
-
-                            <div class="bg-[#0b1120] border border-cyan-500 rounded-2xl p-5">
-
-                                <p class="text-gray-400">
-                                    UTR Number
                                 </p>
 
-                                <h3 class="text-xl font-bold mt-2">
-                                    <%= application.utrNumber || "Not Submitted Yet" %>
-                                </h3>
-
-                            </div>
-
-                            <div class="bg-[#0b1120] border border-cyan-500 rounded-2xl p-5">
-
-                                <p class="text-gray-400">
-                                    Date
-                                </p>
-
-                                <h3 class="text-lg font-bold mt-2">
+                                <p>
+                                    <span class="font-bold">Last Update:</span>
                                     <% if (application.createdAt) { %>
                                         <%= new Date(application.createdAt).toLocaleString() %>
                                     <% } else { %>
                                         -
                                     <% } %>
-                                </h3>
+                                </p>
+
+                            </div>
+
+                            <div class="space-y-3">
+
+                                <span class="status-pill
+                                    <%= application.status === 'Completed'
+                                        ? 'bg-green-500 text-white'
+                                        : application.status === 'Rejected'
+                                        ? 'bg-red-500 text-white'
+                                        : application.status === 'Processing'
+                                        ? 'bg-blue-500 text-white'
+                                        : application.status === 'OTP Pending'
+                                        ? 'bg-purple-500 text-white'
+                                        : 'bg-orange-400 text-white' %>">
+
+                                    <%= application.status || "Pending" %>
+
+                                </span>
+
+                                <% if (application.receivingPdf) { %>
+
+                                    <a href="<%= application.receivingPdf %>"
+                                        target="_blank"
+                                        class="status-pill bg-green-600 text-white block">
+
+                                        Receiving
+
+                                    </a>
+
+                                <% } else { %>
+
+                                    <span class="status-pill bg-red-500 text-white">
+                                        No Receiving
+                                    </span>
+
+                                <% } %>
 
                             </div>
 
                         </div>
 
-                        <!-- ACTION BUTTONS -->
-
-                        <div class="grid md:grid-cols-3 gap-5 mt-10">
+                        <div class="grid md:grid-cols-3 gap-4 mt-7">
 
                             <a href="/receipt/<%= application.tokenNumber %>"
-                                class="text-center py-4 bg-cyan-500 rounded-2xl text-black font-bold hover:bg-cyan-600 transition">
+                                class="text-center py-4 bg-[#0d6dcc] rounded-xl text-white font-bold hover:bg-[#07175f] transition">
 
                                 View Receipt
 
@@ -194,7 +383,7 @@
 
                                 <a href="<%= application.receivingPdf %>"
                                     target="_blank"
-                                    class="text-center py-4 bg-green-500 rounded-2xl text-black font-bold hover:bg-green-600 transition">
+                                    class="text-center py-4 bg-green-500 rounded-xl text-white font-bold hover:bg-green-600 transition">
 
                                     Download Receiving
 
@@ -202,15 +391,15 @@
 
                             <% } else { %>
 
-                                <div class="text-center py-4 border border-gray-600 rounded-2xl text-gray-400">
+                                <div class="text-center py-4 border border-gray-300 rounded-xl text-gray-500 font-bold">
                                     Receiving Pending
                                 </div>
 
                             <% } %>
 
-                            <a href="https://wa.me/<%= settings.whatsappNumber || '' %>"
+                            <a href="https://wa.me/<%= settings && settings.whatsappNumber ? settings.whatsappNumber : '' %>"
                                 target="_blank"
-                                class="text-center py-4 border border-green-500 rounded-2xl text-green-400 hover:bg-green-500 hover:text-black transition">
+                                class="text-center py-4 border border-green-500 rounded-xl text-green-600 font-bold hover:bg-green-500 hover:text-white transition">
 
                                 WhatsApp Support
 
@@ -222,48 +411,209 @@
 
                 <% } else if (application === undefined) { %>
 
-                    <div class="mt-10 bg-red-500/10 border border-red-500 rounded-3xl p-6 text-center">
+                    <div class="soft-card rounded-2xl p-8 text-center border-red-300">
 
-                        <h2 class="text-2xl font-bold text-red-400">
+                        <h3 class="text-3xl font-black text-red-600">
                             Invalid Token Number
-                        </h2>
+                        </h3>
 
-                        <p class="text-gray-400 mt-3">
+                        <p class="text-gray-600 mt-3">
                             Token check karke dobara try karein.
                         </p>
 
                     </div>
 
+                <% } else { %>
+
+                    <div class="soft-card rounded-2xl p-6">
+
+                        <div class="space-y-3 text-xl">
+
+                            <p>
+                                <span class="font-bold">Service Name:</span>
+                                - PAN Card
+                            </p>
+
+                            <p>
+                                <span class="font-bold">Applicant Name:</span>
+                                RI Kumar
+                            </p>
+
+                            <p>
+                                <span class="font-bold">Token ID:</span>
+                                -
+                            </p>
+
+                            <p>
+                                <span class="font-bold">Status:</span>
+                                <span class="text-[#0d6dcc] font-bold">In Process</span>
+                            </p>
+
+                            <p>
+                                <span class="font-bold">Payment:</span>
+                                <span class="text-green-600 font-bold">Received</span>
+                            </p>
+
+                            <p>
+                                <span class="font-bold">Last Update:</span>
+                                -
+                            </p>
+
+                        </div>
+
+                        <div class="flex flex-wrap gap-3 mt-5">
+
+                            <span class="status-pill bg-orange-400 text-white">
+                                Pending
+                            </span>
+
+                            <span class="status-pill bg-blue-500 text-white">
+                                In Process
+                            </span>
+
+                            <span class="status-pill bg-green-500 text-white">
+                                Completed
+                            </span>
+
+                            <span class="status-pill bg-red-500 text-white">
+                                Rejected
+                            </span>
+
+                        </div>
+
+                    </div>
+
                 <% } %>
 
-                <!-- SUPPORT BOX -->
+            </section>
 
-                <div class="mt-10 bg-black border border-cyan-500 rounded-3xl p-6 text-center">
+        </div>
 
-                    <h3 class="text-2xl font-bold text-cyan-400">
-                        Need Help?
+        <!-- HELP SECTION -->
+
+        <section class="mt-12">
+
+            <h3 class="text-3xl font-black text-black mb-4">
+                Help
+            </h3>
+
+            <div class="grid lg:grid-cols-[1fr_330px] gap-6">
+
+                <div class="soft-card rounded-2xl p-8">
+
+                    <div class="hidden md:flex items-center gap-4">
+
+                        <div class="text-center">
+                            <div class="timeline-dot mx-auto"></div>
+                            <h4 class="font-black text-xl mt-5">
+                                Application<br>Submitted
+                            </h4>
+                        </div>
+
+                        <div class="timeline-line"></div>
+
+                        <div class="text-4xl text-gray-500">
+                            →
+                        </div>
+
+                        <div class="timeline-line"></div>
+
+                        <div class="text-center">
+                            <div class="timeline-dot mx-auto bg-[#076b93]"></div>
+                            <h4 class="font-black text-xl mt-5">
+                                Documents<br>Verified
+                            </h4>
+                        </div>
+
+                        <div class="timeline-line"></div>
+
+                        <div class="text-4xl text-gray-500">
+                            →
+                        </div>
+
+                        <div class="timeline-line"></div>
+
+                        <div class="text-center">
+                            <div class="timeline-dot mx-auto bg-[#06a7bf]"></div>
+                            <h4 class="font-black text-xl mt-5">
+                                Work In<br>Process
+                            </h4>
+                        </div>
+
+                    </div>
+
+                    <div class="md:hidden space-y-4">
+
+                        <div class="font-black text-lg">
+                            ✅ Application Submitted
+                        </div>
+
+                        <div class="font-black text-lg">
+                            ✅ Documents Verified
+                        </div>
+
+                        <div class="font-black text-lg">
+                            ✅ Work In Process
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="soft-card rounded-2xl p-7 text-center">
+
+                    <h3 class="text-2xl font-black">
+                        Token नहीं मिला?
                     </h3>
 
-                    <p class="text-gray-400 mt-3">
-                        WhatsApp:
-                        <span class="text-cyan-400 font-bold">
-                            <%= settings.whatsappNumber || "-" %>
-                        </span>
+                    <p class="text-xl mt-2">
+                        Cyber Point से संपर्क करें
                     </p>
 
-                    <p class="text-gray-400 mt-2">
-                        <%= settings.noticeText || "Please keep your token number safe." %>
-                    </p>
+                    <div class="grid grid-cols-2 gap-3 mt-5">
+
+                        <a href="tel:<%= settings && settings.paymentNumber ? settings.paymentNumber : '' %>"
+                            class="py-3 rounded-lg gradient-btn text-white font-bold">
+
+                            Call Now
+
+                        </a>
+
+                        <a href="https://wa.me/<%= settings && settings.whatsappNumber ? settings.whatsappNumber : '' %>"
+                            target="_blank"
+                            class="py-3 rounded-lg bg-green-500 text-white font-bold hover:bg-green-600 transition">
+
+                            WhatsApp
+
+                        </a>
+
+                    </div>
 
                 </div>
 
             </div>
 
-        </div>
+        </section>
 
-    </div>
+        <!-- FOOTER -->
 
-    <%- include("../partials/footer") %>
+        <footer class="mt-12 border-t border-gray-300 py-6 text-center text-gray-800">
+
+            <p>
+                Copyright © Cyber Point
+            </p>
+
+            <p class="mt-2">
+                Owner:
+                <span class="font-black">
+                    KAISH
+                </span>
+            </p>
+
+        </footer>
+
+    </main>
 
 </body>
+
 </html>
